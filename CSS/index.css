@@ -1,0 +1,4213 @@
+/* --- 1. THEME VARIABLES --- */
+:root {
+    --font-main: "Plus Jakarta Sans", sans-serif;
+    /* ------------------------------ */
+
+    /* Các biến cũ vẫn giữ nguyên bên dưới... */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-full: 9999px;
+
+    --bg-body: #f8fafc;
+    /* LIGHT MODE (Default) */
+    --bg-body: #f8fafc;
+    --surface: #ffffff;
+    --surface-glass: rgba(255, 255, 255, 0.95);
+    --border-color: #e2e8f0;
+
+    --primary: #6366f1;
+    --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    --primary-light: #eef2ff;
+    --primary-focus: rgba(99, 102, 241, 0.25); /* Focus ring color */
+
+    --accent-pink: #ec4899;
+    --accent-cyan: #06b6d4;
+    --accent-orange: #f97316;
+    --accent-green: #10b981;
+    --accent-purple: #a855f7;
+
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --text-invert: #ffffff;
+
+    --shadow-card:
+        0 10px 15px -3px rgba(0, 0, 0, 0.05),
+        0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    --shadow-input: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+    --color-again: #ef4444;
+    --color-hard: #f59e0b;
+    --color-good: #10b981;
+    --color-easy: #3b82f6;
+
+    /* Heatmap Colors (GitHub Style Green) */
+    /* Level 0: Không có XP (< 30) */
+    --heat-l0: #ebedf0;
+    /* Level 1: >= 30 XP */
+    --heat-l1: #ffff66;
+    /* Level 2: >= 70 XP */
+    --heat-l2: #0d4429;
+    /* Level 3: >= 115 XP */
+    --heat-l4: #216e39;
+    /* Level 4: >= 150 XP */
+    --heat-l3: #30a14e;
+    /* Level 5: >= 200 XP (Đậm nhất) */
+    --heat-l5: #40c463;
+
+    /* --- KHÔI PHỤC CÁC BIẾN RADIUS --- */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-full: 9999px;
+    /* -------------------------------- */
+
+    /* LIGHT MODE (Default) */
+    --bg-body: #f8fafc;
+    /* ... (giữ nguyên các phần khác) ... */
+}
+
+/* DARK MODE OVERRIDES */
+[data-theme="dark"] {
+    --bg-body: #0f172a; /* Slate 900 */
+    --surface: #1e293b; /* Slate 800 */
+    --surface-glass: rgba(30, 41, 59, 0.95);
+    --border-color: #334155;
+
+    --primary: #818cf8;
+    --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --primary-light: #312e81;
+    --primary-focus: rgba(129, 140, 248, 0.25);
+
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-invert: #ffffff;
+
+    /* Heatmap Dark Mode */
+    --heat-l0: #161b22;
+    --heat-l1: #ffff66;
+    --heat-l2: #006d32;
+    --heat-l3: #26a641;
+    --heat-l4: #39d353;
+
+    --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    --shadow-input: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* user-select: none; */
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+        background-color 0.3s,
+        border-color 0.3s,
+        color 0.3s;
+}
+
+/* --- ALLOW TEXT SELECTION FOR STUDY CONTENT --- */
+.word-text,
+.word-text-back,
+.ipa-text,
+#card-meaning,
+#card-example,
+.note-text,
+.note-label,
+.note-tag,
+.tooltip-item span,
+#writing-question-text {
+    user-select: text !important;
+    -webkit-user-select: text !important;
+    cursor: text;
+}
+
+/* Keep pointer for the main word to indicate clickability (for speech) */
+.word-text,
+.word-text-back {
+    cursor: pointer;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+/* --- 2. LAYOUT --- */
+.app-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    min-width: 250px;
+    background: var(--surface);
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-color);
+    z-index: 50;
+    flex-shrink: 0;
+}
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.logo i {
+    font-size: 32px;
+    color: #4f46e5;
+    -webkit-text-fill-color: #4f46e5;
+}
+[data-theme="dark"] .logo i {
+    color: #818cf8;
+    -webkit-text-fill-color: #818cf8;
+}
+
+.nav-item {
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.nav-item:hover {
+    background-color: var(--primary-light);
+    color: var(--primary);
+}
+.nav-item.active {
+    background: var(--primary-gradient);
+    color: var(--text-invert);
+    box-shadow: 0 8px 16px -4px rgba(99, 102, 241, 0.4);
+}
+.nav-item.active i {
+    color: var(--text-invert);
+}
+.nav-item i {
+    font-size: 20px;
+}
+.divider {
+    height: 1px;
+    background: var(--border-color);
+    margin: 20px 0;
+}
+.theme-toggle {
+    margin-top: auto;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-body);
+    border: 1px solid var(--border-color);
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+    overflow-y: auto;
+    position: relative;
+    min-width: 0;
+}
+
+/* --- 3. COMPONENTS --- */
+.dashboard-grid {
+    display: grid;
+    /* UPDATE: Chuyển sang 5 cột để fit layout 1-2-2 */
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.bento-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    border: 1px solid var(--border-color);
+    transition:
+        transform 0.2s,
+        border-color 0.2s;
+}
+.bento-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary);
+}
+
+.card-welcome {
+    grid-column: span 2;
+    background: var(--primary-gradient);
+    color: white;
+    overflow: hidden;
+    border: none;
+}
+.card-welcome::after {
+    content: "";
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    width: 150px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+/* --- STREAK CARD STYLES --- */
+.card-streak {
+    grid-column: span 1;
+    align-items: center;
+    text-align: center;
+    padding: 20px 24px;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.streak-icon-wrapper {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(245, 158, 11, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+    margin: 5px 0;
+}
+
+.streak-fire {
+    font-size: 36px;
+    color: #f59e0b;
+    z-index: 2;
+    transition: all 0.5s ease;
+    margin: 0;
+    animation: bounce 2s infinite;
+}
+
+/* Milestone Levels */
+/* Level 1: 10+ (Hot Red) */
+.streak-milestone-10 .streak-icon-wrapper {
+    background: rgba(239, 68, 68, 0.15);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+}
+.streak-milestone-10 .streak-fire {
+    color: #ef4444;
+    filter: drop-shadow(0 0 4px #ef4444);
+}
+
+/* Level 2: 30+ (Ice Blue) */
+.streak-milestone-30 .streak-icon-wrapper {
+    background: rgba(59, 130, 246, 0.15);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+.streak-milestone-30 .streak-fire {
+    color: #3b82f6;
+    filter: drop-shadow(0 0 6px #3b82f6);
+}
+
+/* Level 3: 50+ (Golden) */
+.streak-milestone-50 .streak-icon-wrapper {
+    background: rgba(234, 179, 8, 0.15);
+    box-shadow: 0 0 25px rgba(234, 179, 8, 0.5);
+    border: 1px solid rgba(234, 179, 8, 0.3);
+}
+.streak-milestone-50 .streak-fire {
+    color: #eab308;
+    filter: drop-shadow(0 0 8px #eab308);
+}
+
+/* Level 4: 100+ (Legendary Purple) */
+.streak-milestone-100 .streak-icon-wrapper {
+    background: linear-gradient(
+        135deg,
+        rgba(168, 85, 247, 0.2),
+        rgba(236, 72, 153, 0.1)
+    );
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+    animation: pulse-glow 3s infinite;
+}
+.streak-milestone-100 .streak-fire {
+    background: linear-gradient(to bottom, #d946ef, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.8));
+}
+
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(168, 85, 247, 0.7);
+        transform: scale(1.05);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+        transform: scale(1);
+    }
+}
+
+.streak-progress {
+    width: 100%;
+    height: 6px;
+    background: var(--bg-body);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    margin-top: auto;
+    position: relative;
+    overflow: hidden;
+}
+.streak-progress-bar {
+    height: 100%;
+    background: #f59e0b;
+    border-radius: 10px;
+    width: 0%;
+    transition:
+        width 1s cubic-bezier(0.4, 0, 0.2, 1),
+        background-color 0.5s ease;
+}
+.streak-next-goal {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* --- STREAK TOOLTIP --- */
+.streak-tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.streak-tooltip-content {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    right: -10px;
+    width: max-content;
+    min-width: 220px;
+    max-width: 320px;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 16px;
+    z-index: 100;
+    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform: translateY(10px);
+    pointer-events: none;
+}
+
+.streak-tooltip-wrapper:hover .streak-tooltip-content {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(5px);
+    pointer-events: auto;
+}
+
+.tooltip-title {
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    text-align: left;
+    letter-spacing: 0.5px;
+}
+
+.tooltip-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+    padding: 4px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.tooltip-item:hover {
+    background: var(--bg-body);
+}
+
+.tooltip-item span {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.streak-icon-wrapper.small {
+    width: 36px;
+    height: 36px;
+    margin: 0;
+}
+.streak-icon-wrapper.small .streak-fire {
+    font-size: 18px;
+    animation: none;
+}
+
+.card-total {
+    grid-column: span 1;
+    align-items: center;
+    text-align: center;
+}
+.card-stats {
+    grid-column: span 1;
+}
+
+/* --- UPDATED CARD LAYOUT --- */
+.card-action {
+    /* SRS chính chiếm 3 phần */
+    grid-column: span 3;
+    background: var(--bg-body);
+    border: 2px dashed var(--border-color);
+    align-items: center;
+    padding: 32px;
+}
+
+.card-topic {
+    /* Học chủ đề chiếm 2 phần cùng hàng với SRS */
+    grid-column: span 2;
+    background: linear-gradient(135deg, var(--accent-cyan), #3b82f6);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* New Container for Practice Area */
+.practice-zone-container {
+    /* Full width ở hàng dưới */
+    grid-column: span 5;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+}
+
+.practice-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+.practice-header h3 {
+    font-size: 18px;
+    color: var(--text-main);
+    font-weight: 800;
+}
+
+.practice-grid-inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cột cho 4 thẻ */
+    gap: 20px;
+}
+
+/* Mini Practice Cards */
+.practice-card {
+    padding: 20px;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    border: none;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.practice-card:hover {
+    transform: translateY(-4px);
+}
+.practice-card i {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+.practice-card-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+.practice-card-desc {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+/* Specific Colors for Practice Cards */
+.pc-happy {
+    background: linear-gradient(135deg, #ec4899, #fb7185);
+}
+.pc-writing {
+    background: linear-gradient(135deg, #a855f7, #7c3aed);
+}
+.pc-reading {
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+}
+.pc-quiz {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+/* Thêm vào index.css */
+.pc-ai-story {
+    background: linear-gradient(
+        135deg,
+        #ff6b6b,
+        #ee5253
+    ); /* Màu đỏ cam nổi bật */
+}
+
+.feature-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    opacity: 0.9;
+}
+.feature-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.feature-desc {
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.start-btn {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 14px 40px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s;
+}
+.start-btn:hover {
+    transform: scale(1.05);
+}
+
+/* --- WRITING VIEW --- */
+.writing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.writing-card {
+    background: var(--surface);
+    padding: 40px;
+    border-radius: 32px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    text-align: center;
+    position: relative;
+    animation: slideUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    20%,
+    60% {
+        transform: translateX(-6px);
+    }
+    40%,
+    80% {
+        transform: translateX(6px);
+    }
+}
+.writing-question {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+.writing-hint-text {
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+.writing-input-wrapper {
+    position: relative;
+    margin-bottom: 24px;
+}
+.writing-input {
+    width: 100%;
+    padding: 18px 24px;
+    font-size: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    outline: none;
+    text-align: center;
+    background: var(--bg-body);
+    color: var(--text-main);
+    font-weight: 600;
+    transition: all 0.2s;
+}
+.writing-input:focus {
+    border-color: var(--primary);
+    background: var(--surface);
+    box-shadow: 0 0 0 4px var(--primary-focus);
+}
+.writing-input.error {
+    border-color: var(--color-again);
+    color: var(--color-again);
+    animation: shake 0.4s ease;
+    background: #fef2f2;
+}
+.writing-input.success {
+    border-color: var(--color-good);
+    color: var(--color-good);
+    background: #f0fdf4;
+}
+.writing-submit-btn {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 16px -4px rgba(99, 102, 241, 0.4);
+    transition: transform 0.2s;
+}
+.writing-submit-btn:hover {
+    transform: scale(1.05);
+}
+
+/* --- QUIZ VIEW (NEW) --- */
+.quiz-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.quiz-card {
+    background: var(--surface);
+    padding: 32px;
+    border-radius: 32px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.quiz-timer-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 6px;
+    background: var(--color-hard);
+    width: 100%;
+    transition: width 1s linear;
+}
+.quiz-question-word {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 20px 0 30px;
+    animation: slideUp 0.3s ease;
+}
+.quiz-options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+.quiz-option-btn {
+    padding: 20px;
+    border-radius: 16px;
+    border: 2px solid var(--border-color);
+    background: var(--bg-body);
+    color: var(--text-main);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+}
+.quiz-option-btn:hover {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    transform: translateY(-2px);
+}
+.quiz-option-btn.correct {
+    background: #dcfce7;
+    border-color: #16a34a;
+    color: #16a34a;
+}
+.quiz-option-btn.wrong {
+    background: #fee2e2;
+    border-color: #dc2626;
+    color: #dc2626;
+    opacity: 0.6;
+}
+.quiz-feedback {
+    height: 24px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+/* --- READING VIEW (NEW) --- */
+.reading-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.reading-paper {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 4px; /* Góc nhọn hơn chút giống giấy */
+    box-shadow: var(--shadow-card);
+    padding: 40px 50px;
+    line-height: 1.8;
+    font-size: 18px;
+    color: var(--text-main);
+    position: relative;
+    min-height: 400px;
+    overflow-y: auto;
+}
+/* Trang trí lề giấy */
+.reading-paper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 40px;
+    bottom: 0;
+    width: 2px;
+    background: rgba(239, 68, 68, 0.2); /* Lề đỏ nhạt */
+}
+.reading-title {
+    font-size: 24px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
+}
+.highlight-word {
+    background-color: #fef08a; /* Vàng highlight */
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-weight: 700;
+    color: #854d0e;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    display: inline-block;
+}
+.highlight-word:hover {
+    background-color: #facc15;
+    transform: scale(1.05);
+}
+/* Tooltip nhỏ khi hover vào từ trong bài đọc */
+.highlight-word:hover::after {
+    content: attr(data-meaning);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-main);
+    color: var(--bg-body);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 100;
+    pointer-events: none;
+    margin-bottom: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* READING SELECT LIST */
+.reading-list-item {
+    background: var(--bg-body); /* Dùng màu nền nhạt giống Weak Words */
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px 16px; /* Padding nhỏ gọn hơn */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: auto; /* Bỏ chiều cao tối thiểu cũ */
+}
+
+/* Giữ nguyên hiệu ứng hover */
+.reading-list-item:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.15); /* Bóng màu tím */
+    background: var(--surface);
+}
+.reading-item-title {
+    font-weight: 700;
+    font-size: 16px;
+}
+.reading-item-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* --- HEATMAP GRAPH (GITHUB STYLE - FULL WIDTH) --- */
+/* --- GITHUB STYLE HEATMAP (FULL WIDTH & NO SCROLL) --- */
+
+.heatmap-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden; /* Bỏ thanh cuộn */
+    padding-bottom: 0;
+}
+
+.heatmap-months {
+    display: flex;
+    margin-bottom: 8px;
+    margin-left: 25px; /* Căn chỉnh với lưới bên dưới */
+    justify-content: space-between; /* Dàn đều các tháng ra */
+    font-size: 10px;
+    color: var(--text-muted);
+    width: calc(100% - 25px); /* Trừ đi phần margin-left */
+}
+
+.heatmap-body {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+/* Nhãn ngày (Mon, Wed, Fri...) */
+.heatmap-days {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 2px;
+    font-size: 10px;
+    color: var(--text-muted);
+    /* Chiều cao tự động theo lưới */
+    height: auto;
+    gap: 6px; /* Khoảng cách giữa các chữ */
+}
+
+/* Lưới ô vuông - FULL WIDTH */
+.heatmap-grid {
+    display: grid;
+    width: 100%;
+    /* 53 cột (tuần) đều nhau, chiếm hết chiều ngang */
+    grid-template-columns: repeat(53, 1fr);
+    /* 7 dòng (thứ) */
+    grid-template-rows: repeat(7, 1fr);
+    grid-auto-flow: column; /* Xếp theo cột dọc trước (Thứ 2 -> CN) */
+    gap: 3px; /* Giảm khoảng cách khe hở để đẹp hơn */
+}
+
+.heatmap-cell {
+    width: 100%; /* Chiếm hết ô lưới */
+    aspect-ratio: 1 / 1; /* Luôn giữ hình vuông */
+    border-radius: 2px;
+    background-color: var(--heat-l0);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.heatmap-cell:hover {
+    transform: scale(1.5);
+    z-index: 10;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* Màu sắc cấp độ */
+.heatmap-cell[data-level="1"] {
+    background-color: var(--heat-l1);
+}
+.heatmap-cell[data-level="2"] {
+    background-color: var(--heat-l2);
+}
+.heatmap-cell[data-level="3"] {
+    background-color: var(--heat-l3);
+}
+.heatmap-cell[data-level="4"] {
+    background-color: var(--heat-l4);
+}
+.heatmap-cell[data-level="5"] {
+    background-color: var(--heat-l5);
+}
+
+/* Legend (Chú thích) */
+.heatmap-legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Căn phải */
+    gap: 4px;
+    margin-top: 12px;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+.legend-item {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+/* Legend Styles */
+.heatmap-legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+.legend-item {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+.legend-l0 {
+    background-color: var(--heat-l0);
+}
+.legend-l1 {
+    background-color: var(--heat-l1);
+}
+.legend-l2 {
+    background-color: var(--heat-l2);
+}
+.legend-l3 {
+    background-color: var(--heat-l3);
+}
+.legend-l4 {
+    background-color: var(--heat-l4);
+}
+
+/* --- 4. STUDY FLASHCARD & NOTES LAYOUT --- */
+.study-area {
+    display: none;
+    flex-direction: column;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+/* New Layout: 2 Columns for Study Area */
+.study-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px; /* Card takes remaining, Note takes 380px */
+    gap: 30px;
+    height: 100%;
+    align-items: start;
+}
+
+.flashcard-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Study Note Panel (The new frame) */
+.study-note-panel {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    height: 550px;
+    overflow-y: auto;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.study-note-panel.blurred .note-content {
+    filter: blur(8px);
+    opacity: 0.5;
+    pointer-events: none;
+}
+.study-note-panel.blurred::after {
+    content: "Lật thẻ để xem chi tiết";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 700;
+    color: var(--text-muted);
+    background: var(--bg-body);
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.note-header {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary-light);
+    padding-bottom: 12px;
+}
+
+.note-block {
+    margin-bottom: 20px;
+}
+.note-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+.note-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-main);
+    background: var(--bg-body);
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+.note-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--primary-light);
+    color: var(--primary);
+    margin-right: 6px;
+    margin-bottom: 6px;
+}
+
+.quiz-exit-btn {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+}
+.quiz-exit-btn:hover {
+    background: #fee2e2;
+    color: #ef4444;
+    border-color: #ef4444;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+}
+[data-theme="dark"] .quiz-exit-btn:hover {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    border-color: #fca5a5;
+}
+.flashcard-container {
+    width: 100%;
+    max-width: 600px;
+    height: 420px;
+    perspective: 1200px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+.flashcard {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    border-radius: 32px;
+    box-shadow: var(--shadow-card);
+}
+.flashcard.flipped {
+    transform: rotateY(180deg);
+}
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    text-align: center;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+.card-back {
+    transform: rotateY(180deg);
+    background: var(--bg-body);
+}
+
+.word-text {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--text-main);
+    line-height: 1.2;
+    cursor: pointer;
+    transition: color 0.2s;
+    margin-bottom: 0;
+}
+.word-text:hover {
+    color: var(--primary);
+}
+.word-text:active {
+    transform: scale(0.95);
+}
+
+.word-text-back {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text-main);
+    line-height: 1.2;
+    margin-bottom: 5px;
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.icon-btn {
+    background: var(--primary-light);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--primary);
+    transition: all 0.2s;
+}
+.icon-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.1);
+}
+.icon-btn:active {
+    transform: scale(0.9);
+}
+
+.card-image {
+    max-width: 80%;
+    max-height: 140px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    margin: 10px 0;
+    display: none;
+    align-self: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    background: #fff;
+}
+.card-image.show {
+    display: block;
+}
+
+.ipa-text {
+    font-family: "Courier New", monospace;
+    color: var(--text-muted);
+    background: var(--bg-body);
+    padding: 4px 12px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+    display: inline-block;
+}
+.controls {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    max-width: 600px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    pointer-events: none;
+}
+.controls.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+.srs-btn {
+    flex: 1;
+    padding: 16px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.srs-btn:hover {
+    transform: translateY(-4px);
+}
+.srs-btn i {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+.srs-btn span {
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* --- 5. ADMIN & FILTERS & INPUTS (UPDATED MODERN STYLE) --- */
+.admin-panel {
+    display: none;
+    background: var(--surface);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-color);
+}
+.admin-toolbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+/* -- NEW UNIFIED INPUT/SELECT STYLE -- */
+.form-input,
+.form-select,
+.form-textarea,
+.admin-search,
+.admin-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background-color: var(--surface);
+    color: var(--text-main);
+    font-family: var(--font-main);
+    font-size: 14px;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-input);
+}
+
+/* Specific styling for dropdowns (Selects) with Custom Arrow */
+select,
+.form-select,
+.admin-select,
+#dashboard-topic-filter {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%2394a3b8' d='M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 16px;
+    padding-right: 44px !important; /* Make room for the arrow */
+    cursor: pointer;
+}
+
+/* Specific size adjustments */
+.admin-select {
+    width: auto;
+    min-width: 180px;
+}
+.admin-search {
+    flex: 1;
+    min-width: 200px;
+}
+.form-select {
+    margin-bottom: 16px; /* Spacing for modal inputs */
+}
+
+/* Hover Effects */
+.form-input:hover,
+.form-select:hover,
+.form-textarea:hover,
+.admin-search:hover,
+.admin-select:hover {
+    border-color: #94a3b8; /* Slightly darker grey on hover */
+    background-color: var(--bg-body); /* Subtle shift */
+}
+
+/* Focus Effects (Professional Glow) */
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus,
+.admin-search:focus,
+.admin-select:focus {
+    border-color: var(--primary);
+    background-color: var(--surface);
+    box-shadow: 0 0 0 4px var(--primary-focus);
+}
+
+/* --- IMPROVED TABLE WRAPPER (Auto expand or nice scroll) --- */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 10px;
+    border-radius: 12px;
+    /* Custom Scrollbar for better UX */
+    scrollbar-width: thin;
+    scrollbar-color: var(--text-muted) var(--bg-body);
+}
+
+/* Webkit Scrollbar Styling (Chrome, Safari, Edge) */
+.table-wrapper::-webkit-scrollbar {
+    height: 10px; /* Taller horizontal scrollbar */
+}
+.table-wrapper::-webkit-scrollbar-track {
+    background: var(--bg-body);
+    border-radius: 10px;
+}
+.table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 10px;
+    border: 2px solid var(--bg-body);
+}
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-muted);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Allow table to stretch */
+    min-width: 800px; /* Force scroll on small screens, preventing squash */
+}
+.data-table th {
+    text-align: left;
+    color: var(--text-muted);
+    padding: 12px;
+    font-size: 13px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap; /* Keep headers on one line */
+}
+.data-table td {
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-main);
+    vertical-align: middle;
+}
+.action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4px;
+}
+
+.has-image-indicator {
+    color: var(--accent-green);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- 6. STATISTICS VIEW --- */
+.stats-panel {
+    display: none;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.stats-header {
+    margin-bottom: 30px;
+}
+.stats-grid {
+    /* display: grid; */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+.chart-container,
+.mastery-card,
+.distribution-card {
+    grid-column: span 1;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 20px;
+}
+.chart-container {
+    grid-column: span 2;
+}
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 200px;
+    margin-top: 20px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--border-color);
+}
+.bar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    gap: 8px;
+}
+.bar {
+    width: 60%;
+    background: var(--primary-light);
+    border-radius: 8px 8px 0 0;
+    transition: height 0.5s ease;
+    min-height: 4px;
+}
+.bar:hover {
+    background: var(--primary);
+}
+.bar-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+.progress-row {
+    margin-bottom: 15px;
+}
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text-main);
+}
+.progress-track {
+    width: 100%;
+    height: 8px;
+    background: var(--bg-body);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+.badge-grid {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 90px;
+    background: var(--bg-body);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    opacity: 0.5;
+    filter: grayscale(100%);
+    transition: all 0.3s;
+}
+.badge.unlocked {
+    opacity: 1;
+    filter: grayscale(0%);
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+.badge i {
+    font-size: 32px;
+    margin-bottom: 5px;
+    color: var(--primary);
+}
+.badge span {
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+}
+.weak-words-list {
+    margin-top: 20px;
+}
+.weak-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 14px;
+}
+.weak-item:last-child {
+    border: none;
+}
+
+/* --- 7. SRS MANAGER VIEW (NEW) --- */
+.srs-manager-panel {
+    display: none;
+    background: var(--surface);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-color);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.srs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    min-width: 800px; /* Force scroll */
+}
+.srs-table th {
+    text-align: left;
+    padding: 12px;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+}
+.srs-table td {
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-main);
+    font-size: 14px;
+}
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.status-new {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+.status-learning {
+    background: #ffedd5;
+    color: #c2410c;
+}
+.status-mastered {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+/* --- 8. CUSTOM TOPIC SELECTOR (ENHANCED UI) --- */
+.custom-select-container {
+    border: 2px solid var(--border-color); /* Dày hơn chút */
+    border-radius: 10px; /* Bo góc nhiều hơn */
+    padding: 12px;
+    background: var(--bg-body);
+    max-height: 300px; /* Cao hơn xíu */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Khoảng cách giữa các item */
+    margin-top: 10px; /* Yêu cầu: cách phần trên 1 đoạn ngắn */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02); /* Hiệu ứng chìm nhẹ */
+}
+
+/* Thanh cuộn đẹp */
+.custom-select-container::-webkit-scrollbar {
+    width: 6px;
+}
+.custom-select-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-select-container::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+}
+.custom-select-container::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+.topic-option-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px; /* Padding rộng hơn */
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.topic-option-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px); /* Nổi lên nhẹ */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.topic-option-card.selected {
+    background: var(
+        --primary-light
+    ); /* Nền sáng thay vì đậm để dễ đọc text đen/xanh */
+    color: var(--primary);
+    border-color: var(--primary);
+    border-width: 2px;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+}
+
+.topic-option-card.selected .topic-count {
+    background: var(--surface);
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.topic-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.topic-icon-wrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--bg-body);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--text-main);
+    transition: background 0.2s;
+}
+
+.topic-option-card.selected .topic-icon-wrapper {
+    background: white;
+    color: var(--primary);
+}
+
+.topic-count {
+    font-size: 12px;
+    background: var(--bg-body);
+    padding: 6px 12px;
+    border-radius: 20px;
+    color: var(--text-muted);
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+}
+
+.topic-icon {
+    font-size: 18px;
+}
+
+/* Ẩn select cũ đi */
+.hidden-select {
+    display: none;
+}
+
+/* --- STAGE SELECTOR (Small Pills) --- */
+.stage-pills-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+.stage-pill {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background: var(--surface);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-muted);
+}
+.stage-pill:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+.stage-pill.selected {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* --- MODALS --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+.modal-overlay.open {
+    display: flex;
+}
+.modal-content {
+    background: var(--surface);
+    padding: 32px;
+    border-radius: 24px;
+    width: 480px;
+    max-width: 90%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color);
+}
+.form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+.option-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.option-btn {
+    padding: 12px;
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+    background: var(--bg-body);
+    color: var(--text-main);
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+.option-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+.option-btn.selected {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* TOAST */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9000 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.admin-thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-body);
+}
+.toast {
+    background: var(--surface);
+    color: var(--text-main);
+    padding: 16px 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 5px solid var(--primary);
+    min-width: 300px;
+    animation:
+        toastIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+        toastOut 0.3s ease 2.7s forwards;
+    font-weight: 500;
+    font-size: 14px;
+}
+.toast.success {
+    border-color: var(--color-good);
+}
+.toast.error {
+    border-color: var(--color-again);
+}
+.toast i {
+    font-size: 20px;
+}
+.toast.success i {
+    color: var(--color-good);
+}
+.toast.error i {
+    color: var(--color-again);
+}
+
+/* Animation */
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+@keyframes toastIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes toastOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+.hidden {
+    display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 1300px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .card-welcome {
+        grid-column: span 2;
+    }
+    .card-streak,
+    .card-stats,
+    .card-total {
+        grid-column: span 1;
+    }
+
+    .card-action {
+        grid-column: span 2;
+    } /* SRS Full width on tablet */
+    .card-topic {
+        grid-column: span 2;
+    } /* Topic Full width on tablet */
+
+    .practice-zone-container {
+        grid-column: span 2;
+    }
+    .practice-grid-inner {
+        grid-template-columns: repeat(
+            2,
+            1fr
+        ); /* 2x2 grid for practice on tablet */
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    .chart-container,
+    .mastery-card,
+    .distribution-card {
+        grid-column: span 1;
+    }
+}
+@media (max-width: 900px) {
+    /* On smaller screens, stack the card and note vertically */
+    .study-grid {
+        grid-template-columns: 1fr;
+    }
+    .study-note-panel {
+        height: auto;
+        min-height: 200px;
+    }
+}
+@media (max-width: 850px) {
+    .app-container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 12px;
+        border-right: none;
+        border-top: 1px solid var(--border-color);
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background: var(--surface-glass);
+        backdrop-filter: blur(10px);
+    }
+    .theme-toggle,
+    .logo,
+    .divider {
+        display: none;
+    }
+    .nav-item {
+        flex-direction: column;
+        padding: 8px;
+        margin: 0;
+        gap: 4px;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+    .nav-item span {
+        font-size: 10px;
+    }
+    .main-content {
+        padding: 24px;
+        padding-bottom: 100px;
+    }
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    .card-welcome,
+    .card-streak,
+    .card-stats,
+    .card-total,
+    .card-action,
+    .card-topic,
+    .practice-zone-container {
+        grid-column: span 1;
+    }
+    .practice-grid-inner {
+        grid-template-columns: 1fr; /* Stack on mobile */
+    }
+    .flashcard-container {
+        height: 380px;
+    }
+    .quiz-options-grid {
+        grid-template-columns: 1fr; /* Stack buttons on mobile */
+    }
+    .srs-manager-panel {
+        overflow-x: auto;
+    }
+    .srs-table {
+        min-width: 800px;
+    }
+}
+/* --- SỬA GIAO DIỆN CHỌN BÀI ĐỌC --- */
+
+/* Khung chứa danh sách: cho phép cuộn mượt mà */
+#reading-list-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Vẫn giữ 2 cột */
+    gap: 12px; /* Giảm khoảng cách giữa các ô xuống còn 8px */
+    padding: 18px !important;
+    max-height: 700px; /* Tăng chiều cao khung nhìn */
+    overflow-y: auto;
+    border: 1px;
+    box-shadow: none;
+}
+
+/* 2. Thẻ bài đọc: Style gọn gàng giống "Từ cần cải thiện" */
+.reading-list-item {
+    background: var(--bg-body);
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* Bo góc ít hơn cho gọn */
+    padding: 18px 12px; /* Giảm padding tối đa */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: auto;
+    height: 40px; /* Cố định chiều cao nhỏ gọn */
+}
+
+.reading-list-item:hover {
+    border-color: var(--primary);
+    background: var(--surface);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+/* Icon sách bên trái */
+.reading-item-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--primary-light); /* Màu nền nhạt theo theme */
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-right: 16px;
+    flex-shrink: 0;
+}
+
+/* Nội dung chữ */
+.reading-item-content {
+    flex: 1;
+    overflow: hidden; /* Tránh vỡ khung nếu tên quá dài */
+}
+
+.reading-item-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Cắt chữ ... nếu dài */
+}
+
+.reading-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Tag nhỏ (Topic/Stage) */
+.reading-tag {
+    background: var(--bg-body);
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    font-weight: 600;
+    font-size: 11px;
+}
+
+/* Tag hiển thị Topic và Giai đoạn */
+.reading-tag {
+    background: var(--bg-body);
+    padding: 4px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-weight: 600;
+}
+
+/* Mũi tên bên phải */
+.reading-item-arrow {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+.reading-list-item:hover .reading-item-arrow {
+    background: var(--primary);
+    color: white;
+}
+
+/* Responsive: Trên điện thoại thì về lại 1 cột */
+@media (max-width: 768px) {
+    #reading-list-container {
+        grid-template-columns: 1fr;
+    }
+}
+/* --- LÀM MỚI GIAO DIỆN READING MODE (FACEBOOK STYLE) --- */
+
+/* 1. Cấu hình khung bao ngoài: Cho phép scroll toàn trang */
+.reading-container {
+    display: block; /* Bỏ flex center để nội dung trôi tự nhiên */
+    height: auto; /* Bỏ chiều cao cố định */
+    min-height: 100%;
+    max-width: 900px; /* Độ rộng chuẩn */
+    margin: 0 auto;
+    padding: 0; /* Xóa padding để chữ thẳng hàng với nút */
+    overflow: visible; /* Cho phép tràn để scroll body */
+}
+
+/* 2. Xóa bỏ khung xám (giấy), xóa thanh cuộn con */
+.reading-paper {
+    background: transparent; /* Bỏ nền xám/trắng */
+    border: none; /* Bỏ viền */
+    box-shadow: none; /* Bỏ bóng đổ */
+    padding: 10px 0; /* Chỉ giữ khoảng cách trên dưới */
+    min-height: auto;
+    overflow: visible; /* Bỏ thanh cuộn riêng (inner scroll) */
+    color: var(--text-main); /* Màu chữ theo theme */
+    font-size: 19px; /* Chữ to hơn xíu cho dễ đọc */
+    line-height: 1.8; /* Dãn dòng thoáng */
+}
+
+/* Xóa đường kẻ đỏ trang trí bên lề cũ */
+.reading-paper::before {
+    display: none;
+}
+
+/* 3. Style mới cho từ vựng: Gạch chân trắng (thay vì tô vàng) */
+.highlight-word {
+    background-color: transparent !important; /* Bắt buộc bỏ màu nền */
+    border-bottom: 1px dashed rgba(150, 150, 150, 0.5); /* Gạch chân mờ */
+    color: inherit; /* Giữ nguyên màu chữ gốc */
+    padding: 0 1px;
+    border-radius: 0;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* Dark mode: Gạch chân màu trắng rõ hơn */
+[data-theme="dark"] .highlight-word {
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.4);
+}
+
+/* Khi di chuột vào từ */
+.highlight-word:hover {
+    color: var(--primary); /* Đổi màu chữ sang màu chủ đạo */
+    border-bottom-color: var(--primary); /* Đổi màu gạch chân */
+    background-color: rgba(99, 102, 241, 0.1) !important; /* Nền tím cực nhẹ */
+    transform: none; /* Bỏ hiệu ứng phóng to */
+}
+
+/* Style cho tiêu đề bài đọc */
+.reading-title {
+    text-align: left; /* Canh trái cho thẳng hàng nút Thoát */
+    border: none;
+    font-size: 32px;
+    padding-bottom: 5px;
+    margin-bottom: 30px;
+}
+
+/* --- THANH HEADER ĐỌC (STICKY) --- */
+.reading-header-bar {
+    /* 1. Ghim cứng lên top */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Đảm bảo nó luôn nổi lên trên nội dung bài đọc */
+
+    /* 2. Màu nền (Quan trọng) */
+    /* Phải có màu nền để khi chữ cuộn lên không bị nhìn xuyên thấu qua nút */
+    background-color: var(--bg-body);
+
+    /* 3. Bố cục (Lấy từ inline style cũ sang) */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* 4. Canh chỉnh khoảng cách cho đẹp */
+    padding-top: 20px; /* Cách mép trên 1 chút */
+    padding-bottom: 15px; /* Cách nội dung bên dưới */
+    margin-bottom: 10px;
+    border-bottom: 1px solid transparent; /* Chuẩn bị sẵn viền nếu muốn */
+    transition: all 0.3s ease;
+}
+
+/* Tùy chọn: Thêm hiệu ứng mờ kính (Glassmorphism) nếu thích đẹp hơn */
+/* Nếu không thích thì bỏ qua đoạn dưới này */
+.reading-header-bar {
+    background-color: var(--bg-body); /* Fallback */
+}
+/* Nếu trình duyệt hỗ trợ backdrop-filter */
+@supports (backdrop-filter: blur(10px)) {
+    .reading-header-bar {
+        background-color: rgba(
+            var(--bg-body-rgb),
+            0.9
+        ); /* Cần chỉnh biến màu RGB nếu muốn trong suốt */
+        /* Hoặc dùng màu cứng nhưng hơi trong */
+        background-color: var(--bg-body);
+        opacity: 0.98;
+    }
+}
+
+/* --- SIDEBAR TOGGLE STYLES --- */
+
+/* 1. Cập nhật Sidebar gốc để có hiệu ứng mượt */
+.sidebar {
+    position: relative; /* Để định vị nút toggle */
+    transition:
+        width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        min-width 0.3s ease;
+    overflow: hidden; /* Ẩn chữ khi thu nhỏ */
+}
+
+/* 2. Style cho nút Toggle */
+.sidebar-toggle-btn {
+    position: absolute;
+    top: 25px;
+    right: 20px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s;
+}
+.sidebar-toggle-btn:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* 3. TRẠNG THÁI THU NHỎ (COLLAPSED) */
+.sidebar.collapsed {
+    width: 80px; /* Thu nhỏ còn 80px */
+    min-width: 80px;
+    padding: 32px 12px; /* Giảm padding ngang */
+}
+
+/* Ẩn chữ khi thu nhỏ */
+.sidebar.collapsed span,
+.sidebar.collapsed .logo-text,
+.sidebar.collapsed .divider {
+    display: none !important;
+    opacity: 0;
+}
+
+/* Căn giữa các icon khi thu nhỏ */
+.sidebar.collapsed .nav-item,
+.sidebar.collapsed .theme-toggle {
+    justify-content: center;
+    padding: 14px 0;
+}
+
+.sidebar.collapsed .nav-item i,
+.sidebar.collapsed .logo i,
+.sidebar.collapsed .theme-toggle i {
+    margin: 0;
+    font-size: 24px; /* Icon to hơn xíu cho dễ nhìn */
+}
+
+/* Điều chỉnh vị trí nút toggle khi thu nhỏ */
+.sidebar.collapsed .sidebar-toggle-btn {
+    right: 50%;
+    transform: translateX(50%); /* Căn giữa nút */
+    top: 80px; /* Dời xuống dưới Logo icon */
+}
+
+/* Ẩn logo icon khi thu nhỏ (hoặc giữ lại tùy bạn, ở đây tôi giữ lại icon sách) */
+.sidebar.collapsed .logo {
+    justify-content: center;
+    margin-bottom: 60px; /* Tăng margin để nhường chỗ cho nút toggle */
+}
+
+/* --- SỬA GIAO DIỆN ĐỌC (FULL WIDTH & FONT TRÒN) --- */
+
+/* 1. Khung bao ngoài: Bung lụa 100% chiều rộng */
+#reading-view .reading-container {
+    display: block;
+    width: 100%; /* Chiếm hết chiều ngang */
+    max-width: none; /* Bỏ giới hạn 900px cũ */
+    margin: 0;
+    padding: 0; /* Bỏ đệm để sát lề */
+    overflow: visible;
+    height: auto;
+}
+
+/* 2. Phần nội dung bài đọc */
+#reading-view .reading-paper {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 10px 0; /* Chỉ giữ khoảng cách trên dưới */
+    overflow: visible;
+
+    /* CẤU HÌNH FONT CHỮ MỚI */
+    font-family: "Nunito", sans-serif; /* Font tròn trịa */
+    font-size: 18px; /* Nhỏ hơn xíu (cũ 19px) */
+    line-height: 1.7; /* Dãn dòng vừa mắt */
+    color: var(--text-main);
+    text-align: justify; /* Căn đều 2 bên lề cho đẹp */
+}
+
+/* Xóa đường kẻ đỏ cũ (nếu còn) */
+#reading-view .reading-paper::before {
+    display: none;
+}
+
+/* Tiêu đề bài đọc */
+.reading-title {
+    text-align: left;
+    border: none;
+    font-family:
+        "Plus Jakarta Sans", sans-serif; /* Giữ tiêu đề cứng cáp hoặc đổi sang Nunito tùy bạn */
+    font-weight: 800;
+    font-size: 30px; /* Giảm xíu cho cân đối */
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+/* Style cho các từ được highlight */
+.highlight-word {
+    background-color: transparent !important;
+    border-bottom: 1px dashed #94a3b8; /* Gạch chân mờ */
+    padding: 0 1px;
+    cursor: pointer;
+    border-radius: 4px; /* Bo góc nhẹ cho từ */
+}
+
+[data-theme="dark"] .highlight-word {
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.4);
+}
+
+.highlight-word:hover {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+    background-color: rgba(99, 102, 241, 0.1) !important;
+}
+
+/* --- BIỂU ĐỒ CỘT (COLUMN CHART) --- */
+.chart-wrapper-flex {
+    display: flex;
+    height: 280px; /* Tăng chiều cao để chứa số liệu */
+    padding: 20px 0 10px 0;
+    font-size: 12px;
+}
+
+/* Cột chứa số liệu trục tung (Y-Axis) */
+.chart-y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-right: 10px;
+    color: var(--text-muted);
+    font-weight: 600;
+    min-width: 40px;
+    position: relative;
+    border-right: 1px solid var(--border-color); /* Trục tung */
+}
+
+/* Khu vực hiển thị các cột (Chart Area) */
+.chart-area {
+    flex: 1;
+    display: flex;
+    align-items: flex-end; /* Căn đáy */
+    justify-content: space-around; /* Chia đều khoảng cách các cột */
+    position: relative;
+    border-bottom: 1px solid var(--border-color); /* Trục hoành */
+    padding: 0 10px; /* Đệm 2 bên để cột không sát mép */
+}
+
+/* Đường kẻ ngang (Grid lines) */
+.grid-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-top: 1px dashed var(--border-color);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Cột biểu đồ đơn lẻ */
+.chart-col-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    width: 15%; /* Độ rộng cột */
+    position: relative;
+    z-index: 2; /* Nổi lên trên grid line */
+}
+
+.chart-bar-col {
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+    transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 4px; /* Luôn hiện 1 chút dù là 0 */
+    position: relative;
+}
+
+/* Số liệu trên đầu cột */
+.chart-val-top {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+    font-weight: 800;
+    color: var(--primary); /* Hoặc dùng màu của cột nếu muốn */
+    font-size: 14px;
+}
+
+/* Nhãn bên dưới (Mới, Sơ cấp...) */
+.chart-label-bottom {
+    margin-top: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-align: center;
+}
+/* --- SỬA GIAO DIỆN DANH SÁCH TỪ YẾU (2 CỘT) --- */
+#weak-words-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Chia 2 cột */
+    gap: 16px;
+    margin-top: 20px;
+
+    /* Giới hạn chiều cao */
+    max-height: 500px;
+    overflow-y: auto; /* Vẫn cho phép cuộn */
+
+    /* --- PHẦN QUAN TRỌNG: ẨN THANH CUỘN --- */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+#weak-words-list::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+/* Style cho từng ô (Giữ nguyên cho đẹp) */
+.weak-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--bg-body);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    transition: all 0.2s;
+}
+
+.weak-item:hover {
+    border-color: var(--color-again);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.1);
+}
+
+/* Style cho từng ô từ vựng */
+.weak-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--bg-body); /* Nền nhạt để nổi bật trong khung */
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    transition: all 0.2s;
+}
+
+.weak-item:hover {
+    border-color: var(--color-again);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.1);
+}
+
+/* Mobile: Về lại 1 cột cho dễ đọc */
+@media (max-width: 768px) {
+    #weak-words-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- STYLE CHO NHÃN CHỦ ĐỀ TRONG BẢNG --- */
+.topic-tag {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap; /* QUAN TRỌNG: Chống xuống dòng */
+
+    /* Màu sắc nhẹ nhàng, tinh tế */
+    background-color: var(--bg-body);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+}
+
+/* Hiệu ứng khi di chuột vào dòng */
+tr:hover .topic-tag {
+    border-color: var(--primary);
+    color: var(--primary);
+    background-color: var(--primary-light);
+}
+
+/* --- IPA CHART STYLES --- */
+.ipa-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+.ipa-section-header {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 30px 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ipa-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+}
+
+.ipa-card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+}
+
+.ipa-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-color: var(--primary);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.15);
+}
+
+.ipa-card:active {
+    transform: scale(0.95);
+}
+
+.ipa-symbol {
+    font-family: "Arial", sans-serif; /* Font chuẩn cho ký tự đặc biệt */
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+/* Màu sắc riêng cho từng loại âm */
+.ipa-card[data-type="vowel"] .ipa-symbol {
+    color: var(--accent-pink);
+}
+.ipa-card[data-type="diphthong"] .ipa-symbol {
+    color: var(--accent-orange);
+}
+.ipa-card[data-type="consonant"] .ipa-symbol {
+    color: var(--primary);
+}
+.ipa-card[data-type="consonant-unvoiced"] .ipa-symbol {
+    color: var(--text-muted);
+}
+
+.ipa-word {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.ipa-word span {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+/* Icon loa nhỏ hiện khi hover */
+.ipa-play-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 16px;
+    color: var(--primary);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.ipa-card:hover .ipa-play-icon {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .ipa-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 cột trên mobile */
+    }
+    .ipa-symbol {
+        font-size: 24px;
+    }
+    .ipa-word {
+        font-size: 12px;
+    }
+}
+
+/* --- AI CHAT LAYOUT & STYLES --- */
+
+/* 1. Định vị lại Grid */
+/* Thẻ AI Chat chiếm 2 cột ngang và 2 hàng dọc (chiếm hết bên trái) */
+.ai-chat-card {
+    grid-column: span 2;
+    grid-row: span 2;
+    padding: 0; /* Xóa padding mặc định để chat full viền */
+    overflow: hidden; /* Để bo góc */
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 380px; /* Chiều cao tối thiểu */
+}
+
+/* 2. Thẻ Action (SRS) thu nhỏ lại còn 2 cột (cũ là 3) */
+.compact-action {
+    grid-column: span 2;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.small-btn {
+    padding: 10px 24px; /* Nút nhỏ hơn xíu */
+    font-size: 14px;
+}
+
+/* 3. Thẻ Topic thu nhỏ lại còn 1 cột (cũ là 2) */
+.compact-topic {
+    grid-column: span 1;
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.feature-icon-small {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+.feature-title-small {
+    font-size: 14px;
+    font-weight: 700;
+}
+.feature-desc-small {
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+/* --- CHAT INTERFACE STYLES --- */
+.chat-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+}
+[data-theme="dark"] .chat-header {
+    background: rgba(30, 41, 59, 0.5);
+}
+
+.chat-title {
+    font-weight: 700;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-main);
+}
+
+.icon-btn-small {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+.icon-btn-small:hover {
+    background: var(--bg-body);
+    color: var(--primary);
+}
+
+.chat-messages {
+    flex-grow: 1; /* Chiếm hết khoảng trống còn lại */
+    padding: 16px;
+    overflow-y: auto; /* Cho phép cuộn */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--bg-body);
+}
+
+.message {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-bottom-left-radius: 2px;
+}
+
+.user-message {
+    align-self: flex-end;
+    background: var(--primary);
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+
+.chat-input-area {
+    padding: 12px;
+    border-top: 1px solid var(--border-color);
+    background: var(--surface);
+    display: flex;
+    gap: 8px;
+}
+
+#ai-input {
+    flex-grow: 1;
+    padding: 10px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-body);
+    outline: none;
+    font-size: 14px;
+    color: var(--text-main);
+}
+#ai-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--primary-focus);
+}
+
+#ai-send-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+#ai-send-btn:hover {
+    transform: scale(1.1);
+}
+
+/* RESPONSIVE: Khi màn hình nhỏ (Tablet/Mobile) */
+@media (max-width: 1300px) {
+    /* Khi màn hình nhỏ, Chat AI sẽ bung ra full width ở trên cùng */
+    .ai-chat-card {
+        grid-column: span 2; /* Full width của grid 2 cột */
+        grid-row: span 1; /* Chỉ chiếm 1 dòng, cho phép cuộn */
+        height: 400px; /* Cố định chiều cao */
+    }
+
+    .compact-action {
+        grid-column: span 1; /* Chia đôi màn hình với Topic */
+    }
+    .compact-topic {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .ai-chat-card {
+        grid-column: span 1;
+    }
+    .compact-action,
+    .compact-topic {
+        grid-column: span 1;
+    }
+}
+
+/* --- FIX LỖI THẺ TỔNG TỪ VỰNG --- */
+.card-total {
+    padding: 20px !important; /* Thu nhỏ lề một chút */
+}
+
+.total-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Đảm bảo menu thả xuống không bị tràn */
+#dashboard-topic-filter {
+    width: 100%;
+    max-width: 100%;
+    background-position: right 8px center; /* Chỉnh lại mũi tên */
+}
+
+#ai-widget-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    font-family: var(--font-main);
+}
+
+#ai-toggle-btn {
+    width: 60px;
+    height: 60px;
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#ai-toggle-btn:hover {
+    transform: scale(1.1);
+}
+
+#ai-chat-box {
+    width: 430px;
+    height: 600px;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-bottom: 15px;
+    /* Animation trồi lên */
+    animation: slideUpWidget 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes slideUpWidget {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ẩn hiện widget */
+#ai-chat-box.hidden {
+    display: none !important;
+}
+#ai-toggle-btn.hidden {
+    display: none !important;
+}
+
+.ai-header {
+    background: var(--primary);
+    color: white;
+    padding: 15px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#ai-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background: var(--bg-body);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ai-msg-bubble {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.ai-intro {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    align-self: flex-start;
+}
+
+.user-bubble {
+    background: var(--primary);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+.bot-bubble {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+}
+
+.ai-input-area {
+    padding: 12px;
+    background: var(--surface);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 8px;
+}
+
+#ai-user-input {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-body);
+    color: var(--text-main);
+    outline: none;
+}
+#ai-user-input:focus {
+    border-color: var(--primary);
+}
+
+.ai-input-area button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 480px) {
+    #ai-chat-box {
+        width: 90vw;
+        height: 60vh;
+        right: 5vw;
+        bottom: 80px;
+    }
+}
+/* --- SCRAMBLE GAME STYLES --- */
+#scramble-view {
+    /* Đảm bảo view này có màu nền hoặc hiển thị rõ */
+    width: 100%;
+    height: 100%;
+}
+
+.scramble-box {
+    border: 2px dashed var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    min-height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Viên từ vựng */
+.word-chip {
+    background: var(
+        --surface
+    ); /* Màu trắng ở light mode, màu tối ở dark mode */
+    border: 1px solid var(--border-color);
+    color: var(--text-main); /* Quan trọng: Màu chữ phải tương phản */
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* --- MOCHI STYLE WRITING --- */
+.hidden {
+    display: none !important;
+}
+
+#immediate-writing-area {
+    width: 100%;
+    max-width: 600px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ẩn nút "Luyện viết ngay" ở mặt sau mặc định, chỉ hiện khi lật */
+#btn-move-to-writing {
+    display: none;
+}
+.flashcard.flipped #btn-move-to-writing {
+    display: block; /* Chỉ hiện khi thẻ đã lật */
+}
+
+/* --- FIX GHI CHÚ CÁ NHÂN (STUDY VIEW) --- */
+#personal-note-input {
+    resize: none !important; /* Tắt tính năng kéo giãn (xóa cái tam giác ở góc) */
+    height: 140px !important; /* Chiều cao cố định (bạn có thể chỉnh số này) */
+    width: 100% !important; /* Chiều rộng luôn full khung chứa */
+    overflow-y: auto; /* Tự động hiện thanh cuộn nếu viết dài */
+    line-height: 1.6; /* Dãn dòng một chút cho dễ đọc */
+    padding: 16px; /* Căn lề trong cho thoáng */
+}
+
+/* --- CẤU HÌNH GHI CHÚ FULL CHIỀU CAO (Flexbox Layout) --- */
+
+/* 1. Panel chính: Chuyển sang flex column để quản lý chiều cao con */
+.study-note-panel {
+    display: flex !important;
+    flex-direction: column;
+}
+
+/* 2. Container nội dung: Chiếm toàn bộ không gian của Panel */
+.note-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* 3. Đảm bảo các khối thông tin bên trên (Định nghĩa/Ví dụ) không bị co lại */
+.note-block {
+    flex-shrink: 0;
+}
+
+/* 4. Khối cuối cùng (Chứa ô Ghi chú): Tự động giãn ra để lấp đầy khoảng trống còn thừa */
+.note-content .note-block:last-child {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0 !important; /* Bỏ lề dưới để sát đáy */
+}
+
+/* 5. Ô nhập liệu: Fill hết chiều cao của khối cha */
+#personal-note-input {
+    flex: 1 !important; /* Chiếm hết phần còn lại */
+    height: auto !important; /* Bỏ chiều cao cố định */
+    min-height: 120px; /* Chiều cao tối thiểu (để không bị quá bé nếu màn hình nhỏ) */
+    resize: none !important; /* Tắt kéo thả thủ công */
+    box-sizing: border-box;
+}
+
+/* --- MODERN SCROLLBAR GLOBAL (Toàn bộ trang & Chatbox) --- */
+
+/* 1. Cấu hình cho Firefox */
+* {
+    scrollbar-width: thin; /* Thanh cuộn mảnh */
+    scrollbar-color: var(--border-color) transparent; /* Màu thanh / Màu nền */
+}
+
+/* 2. Cấu hình cho Chrome, Edge, Safari */
+::-webkit-scrollbar {
+    width: 8px; /* Độ rộng thanh dọc */
+    height: 8px; /* Độ cao thanh ngang */
+}
+
+/* Phần nền (Track) - Để trong suốt cho đẹp */
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+}
+
+/* Phần thanh trượt (Thumb) */
+::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1; /* Màu xám nhẹ (Slate-300) */
+    border-radius: 20px; /* Bo tròn viên thuốc */
+
+    /* Mẹo: Tạo viền trong suốt để thanh cuộn có cảm giác "lơ lửng" nhỏ hơn thực tế */
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+/* Khi di chuột vào thanh cuộn */
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-muted); /* Đậm lên chút khi hover */
+}
+
+/* --- RIÊNG CHO DARK MODE --- */
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background-color: #334155; /* Slate-700 */
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background-color: #475569; /* Slate-600 */
+}
+
+/* --- TỐI ƯU CHO AI CHATBOX --- */
+/* Làm cho khung chat cuộn mượt mà */
+#ai-messages {
+    scroll-behavior: smooth;
+}
+
+/* --- TẾT THEME: WELCOME CARD OVERRIDE --- */
+
+/* 1. Đổi màu nền sang Đỏ - Cam - Vàng (Màu Lì xì/May mắn) */
+body.tet-theme .card-welcome {
+    /* Gradient đỏ cam rực rỡ */
+    background: linear-gradient(
+        135deg,
+        #dc2626 0%,
+        #ea580c 40%,
+        #f59e0b 100%
+    ) !important;
+    border: 1px solid rgba(254, 240, 138, 0.4); /* Viền vàng nhạt */
+    position: relative; /* Để căn chỉnh hình ảnh */
+}
+
+/* 2. Thêm hình cành mai/đào trang trí bên phải */
+body.tet-theme .card-welcome::before {
+    content: "";
+    position: absolute;
+    right: 5px;
+    bottom: -15px; /* Thò xuống dưới một chút cho tự nhiên */
+    width: 150px;
+    height: 150px;
+    /* URL ảnh hoa mai vector (bạn có thể thay bằng link khác hoặc ảnh local) */
+    background-image: url("https://cdn-icons-png.flaticon.com/512/10603/10603775.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    opacity: 0.9;
+    z-index: 1;
+    pointer-events: none; /* Để không che mất nút bấm nếu có */
+    filter: drop-shadow(
+        0 5px 15px rgba(0, 0, 0, 0.15)
+    ); /* Bóng đổ nhẹ cho hình nổi lên */
+}
+
+/* 3. Ẩn vòng tròn mờ cũ đi cho đỡ rối mắt */
+body.tet-theme .card-welcome::after {
+    display: none;
+}
+
+/* 4. Chỉnh màu chữ bên trong cho nổi bật trên nền đỏ */
+body.tet-theme .card-welcome h2,
+body.tet-theme .card-welcome p {
+    color: #fffbeb !important; /* Màu kem sáng (Amber-50) */
+    text-shadow: 0 2px 4px rgba(180, 83, 9, 0.3); /* Bóng chữ màu cam đậm */
+    position: relative;
+    z-index: 2; /* Nổi lên trên hình nền */
+}
+
+/* --- TẾT THEME 2026: FINAL VERSION --- */
+
+/* 1. Reset nền và xóa rác (icon lạ, hộp quà cũ) */
+body.tet-theme .card-welcome {
+    /* Nền đỏ sang trọng */
+    background: radial-gradient(circle at 30% 30%, #dc2626, #991b1b) !important;
+    border: 2px solid #fbbf24 !important; /* Viền vàng */
+    box-shadow: 0 10px 25px rgba(220, 38, 38, 0.4) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* QUAN TRỌNG: Ẩn sạch sẽ các icon cũ (cái hộp quà và cái icon xanh góc trái) */
+body.tet-theme .card-welcome::before,
+body.tet-theme .card-welcome::after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+}
+
+/* 2. Style cho chữ (Nổi bật trên nền đỏ) */
+.welcome-content {
+    position: relative;
+    z-index: 20; /* Nổi lên trên cùng */
+    color: #fff !important;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.welcome-content h2,
+.welcome-content p,
+.welcome-content span {
+    color: #fff !important;
+}
+
+/* 3. TRANG TRÍ GÓC PHẢI: Cành Đào/Mai to đẹp */
+.tet-decor-right {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 220px; /* Hình to rõ */
+    height: 220px;
+    /* Ảnh vector Cành Mai/Đào nghệ thuật */
+    background-image: url("https://cdn-icons-png.flaticon.com/512/9696/9696687.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    z-index: 10;
+    filter: drop-shadow(
+        -5px 5px 5px rgba(0, 0, 0, 0.2)
+    ); /* Đổ bóng cho hình có chiều sâu */
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+/* 4. TRANG TRÍ GÓC TRÁI: Dây Pháo + Lồng Đèn */
+.tet-decor-left {
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    width: 80px;
+    height: 140px;
+    /* Ảnh dây pháo treo */
+    background-image: url("https://cdn-icons-png.flaticon.com/512/10603/10603781.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 10;
+    transform-origin: top center;
+    animation: swingDecor 4s ease-in-out infinite; /* Đung đưa nhẹ */
+    opacity: 0;
+}
+
+/* --- TẾT THEME: NÂNG CẤP CARD WELCOME --- */
+
+/* 1. Nền & Bố cục chính */
+body.tet-theme .card-welcome {
+    /* Gradient Đỏ - Vàng hoàng gia */
+    background: radial-gradient(
+        circle at top left,
+        #ef4444,
+        #b91c1c,
+        #7f1d1d
+    ) !important;
+    position: relative;
+    overflow: hidden; /* Để pháo hoa không nổ tràn ra ngoài khung */
+    border: 2px solid #fcd34d; /* Viền vàng kim loại */
+    box-shadow: 0 10px 30px -5px rgba(220, 38, 38, 0.5); /* Bóng đổ màu đỏ */
+}
+
+/* Ẩn các hình trang trí cũ */
+body.tet-theme .card-welcome::before,
+body.tet-theme .card-welcome::after {
+    display: none;
+}
+
+/* 2. Nội dung chữ (Cho nổi lên trên các hình nền) */
+.welcome-content {
+    position: relative;
+    z-index: 10; /* Cao hơn pháo hoa */
+    color: #fffbeb;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 3. TRANG TRÍ: CÀNH ĐÀO/MAI (Góc Phải) */
+/* Thay hộp quà bằng Cành Đào lớn */
+/* --- SỬA LẠI HÌNH ẢNH TRANG TRÍ TẾT (FIX LỖI ICON) --- */
+
+/* 1. GÓC PHẢI: Cành Mai/Đào (Dùng link ảnh Hoa ổn định hơn) */
+/* --- TẾT THEME 2026: PHIÊN BẢN KHÔNG LỖI ẢNH --- */
+
+/* 1. GÓC PHẢI: Cành Mai Vàng (Vẽ bằng code SVG) */
+/* --- CẬP NHẬT: CÀNH MAI NGHỆ THUẬT HƠN (Vẽ bằng SVG chi tiết) --- */
+
+.tet-decor-right {
+    position: absolute;
+    bottom: -30px; /* Thấp xuống một chút để gốc cây ẩn đi tự nhiên */
+    right: -40px; /* Dịch sang phải để cành vươn ra */
+    width: 300px; /* Tăng kích thước để hình rõ nét và hoành tráng hơn */
+    height: 300px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+
+    /* Đây là bức tranh Cành Mai chi tiết được nhúng trực tiếp */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Cdefs%3E%3CradialGradient id='flowerGrad' cx='50%25' cy='50%25' r='50%25' fx='50%25' fy='50%25'%3E%3Cstop offset='0%25' style='stop-color:%23fff7cc'/%3E%3Cstop offset='40%25' style='stop-color:%23ffeb3b'/%3E%3Cstop offset='100%25' style='stop-color:%23fdd835'/%3E%3C/radialGradient%3E%3C/defs%3E%3C!-- Cành cây uốn lượn --%3E%3Cpath d='M450,500 C400,400 480,300 350,250 C250,210 300,150 200,100 C150,75 100,80 50,50' stroke='%235D4037' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3Cpath d='M350,250 C300,280 250,250 200,300 M200,100 C150,120 120,180 80,200' stroke='%235D4037' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C!-- Hoa Mai lớn (Dùng gradient) --%3E%3Cg fill='url(%23flowerGrad)' stroke='%23FBC02D' stroke-width='1'%3E%3Ccircle cx='350' cy='250' r='25'/%3E%3Ccircle cx='200' cy='100' r='20'/%3E%3Ccircle cx='50' cy='50' r='18'/%3E%3Ccircle cx='200' cy='300' r='22'/%3E%3C/g%3E%3C!-- Nụ hoa nhỏ và chi tiết thêm --%3E%3Cg fill='%23FFD54F'%3E%3Ccircle cx='400' cy='350' r='10'/%3E%3Ccircle cx='280' cy='200' r='12'/%3E%3Ccircle cx='150' cy='150' r='8'/%3E%3Ccircle cx='80' cy='200' r='10'/%3E%3Ccircle cx='120' cy='80' r='7'/%3E%3C/g%3E%3C!-- Nhụy hoa đỏ tạo điểm nhấn --%3E%3Cg fill='%23D84315'%3E%3Ccircle cx='350' cy='250' r='5'/%3E%3Ccircle cx='200' cy='100' r='4'/%3E%3Ccircle cx='200' cy='300' r='4'/%3E%3C/g%3E%3C/svg%3E");
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    /* Thêm bóng đổ nhẹ để cây có chiều sâu */
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+/* Giữ nguyên phần này để hiện hình khi có theme Tết */
+body.tet-theme .tet-decor-right {
+    opacity: 1;
+}
+
+/* 2. GÓC TRÁI: Dây Pháo Đỏ (Vẽ bằng code SVG) */
+.tet-decor-left {
+    position: absolute;
+    top: -15px;
+    left: 15px;
+    width: 70px;
+    height: 140px;
+    z-index: 10;
+    opacity: 0;
+    transform-origin: top center;
+    animation: swingDecor 3s ease-in-out infinite;
+    /* Đây là mã hình ảnh Dây Pháo */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 200'%3E%3Cline x1='50' y1='0' x2='50' y2='180' stroke='%23FCD34D' stroke-width='4'/%3E%3Crect x='25' y='20' width='50' height='30' rx='5' fill='%23DC2626' stroke='%23FCD34D' stroke-width='2'/%3E%3Crect x='25' y='60' width='50' height='30' rx='5' fill='%23DC2626' stroke='%23FCD34D' stroke-width='2'/%3E%3Crect x='25' y='100' width='50' height='30' rx='5' fill='%23DC2626' stroke='%23FCD34D' stroke-width='2'/%3E%3Crect x='25' y='140' width='50' height='30' rx='5' fill='%23DC2626' stroke='%23FCD34D' stroke-width='2'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Hiện hình khi có theme Tết */
+body.tet-theme .tet-decor-right,
+body.tet-theme .tet-decor-left {
+    opacity: 1;
+}
+
+/* Hiệu ứng đung đưa */
+@keyframes swingDecor {
+    0%,
+    100% {
+        transform: rotate(-3deg);
+    }
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+/* Chỉ hiện khi bật theme Tết */
+body.tet-theme .tet-decor-right,
+body.tet-theme .tet-decor-left {
+    opacity: 1;
+}
+
+/* Animation đung đưa cho lồng đèn */
+@keyframes swingDecor {
+    0%,
+    100% {
+        transform: rotate(-3deg);
+    }
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+/* --- (TÙY CHỌN) NẾU LINK ẢNH VẪN LỖI --- */
+/* Bạn có thể dùng Emoji làm hình thay thế (Cách này bao không lỗi) */
+/*
+.tet-decor-right::after {
+    content: '🌸'; 
+    font-size: 150px;
+    position: absolute;
+    bottom: 0; right: 0;
+}
+.tet-decor-left::after {
+    content: '🏮'; 
+    font-size: 80px;
+    position: absolute;
+    top: 0; left: 0;
+}
+*/
+
+/* Chỉ hiện hình khi có class tet-theme */
+body.tet-theme .tet-decoration-right,
+body.tet-theme .tet-decoration-left {
+    opacity: 1;
+}
+
+/* 5. HIỆU ỨNG PHÁO HOA (CSS Pure Animation) */
+@keyframes firework {
+    0% {
+        transform: translate(var(--x), var(--initialY));
+        width: var(--initialSize);
+        opacity: 1;
+    }
+    50% {
+        width: 0.5vmin;
+        opacity: 1;
+    }
+    100% {
+        width: var(--finalSize);
+        opacity: 0;
+    }
+}
+
+.firework-1,
+.firework-2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.5vmin;
+    aspect-ratio: 1;
+    background:
+        radial-gradient(circle, #ff0 0.2vmin, #0000 0) 50% 00%,
+        radial-gradient(circle, #ff0 0.2vmin, #0000 0) 00% 50%,
+        radial-gradient(circle, #ff0 0.2vmin, #0000 0) 50% 99%,
+        radial-gradient(circle, #ff0 0.2vmin, #0000 0) 99% 50%,
+        radial-gradient(circle, #ff0 0.2vmin, #0000 0) 80% 90%,
+        radial-gradient(circle, #ff0 0.2vmin, #0000 0) 95% 90%,
+        radial-gradient(circle, #ff0 0.2vmin, #0000 0) 90% 60%,
+        radial-gradient(circle, #ff0 0.2vmin, #0000 0) 15% 60%,
+        radial-gradient(circle, #ff0 0.2vmin, #0000 0) 80% 20%,
+        radial-gradient(circle, #ff0 0.2vmin, #0000 0) 22% 90%,
+        radial-gradient(circle, #ff0 0.2vmin, #0000 0) 45% 90%,
+        radial-gradient(circle, #ff0 0.2vmin, #0000 0) 33% 34%;
+    background-size: 0.5vmin 0.5vmin;
+    background-repeat: no-repeat;
+    display: none; /* Ẩn mặc định */
+}
+
+body.tet-theme .firework-1 {
+    display: block;
+    animation: firework 2s infinite;
+    left: 30%;
+    top: 40%;
+    --x: -50%;
+    --initialY: 60vmin;
+    --initialSize: 0.5vmin;
+    --finalSize: 45vmin;
+    z-index: 1;
+}
+
+body.tet-theme .firework-2 {
+    display: block;
+    animation: firework 2.5s infinite;
+    animation-delay: 1s; /* Nổ chậm hơn cái 1 chút */
+    left: 70%;
+    top: 30%;
+    --x: -50%;
+    --initialY: 60vmin;
+    --initialSize: 0.5vmin;
+    --finalSize: 35vmin;
+    z-index: 1;
+}
+
+/* Hiệu ứng đung đưa cho dây pháo */
+@keyframes swing {
+    0%,
+    100% {
+        transform: rotate(-3deg);
+    }
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+/* --- MATCH GAME: GIAO DIỆN CHUẨN --- */
+
+/* 1. Khung chứa Game */
+/* Chúng ta dùng Flexbox để căn giữa nội dung vào màn hình */
+.match-container {
+    width: 100%;
+    max-width: 900px; /* Giới hạn chiều rộng để thẻ không bị giãn quá đà trên màn to */
+    margin: 0 auto; /* Căn giữa khung theo chiều ngang (quan trọng!) */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa nội dung bên trong */
+    justify-content: center; /* Căn giữa theo chiều dọc nếu màn hình cao */
+    flex-grow: 1; /* Chiếm hết không gian còn thừa */
+}
+
+/* 2. Lưới thẻ bài */
+.match-grid {
+    display: grid;
+    /* Tự động chia cột:
+       - minmax(130px, 1fr): Mỗi thẻ nhỏ nhất 130px, nếu còn chỗ thì tự giãn ra (1fr)
+       - auto-fit: Tự động xuống dòng nếu hết chỗ */
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 16px; /* Khoảng cách giữa các thẻ */
+    width: 100%; /* Chiếm full chiều rộng của container */
+}
+
+/* 3. Thẻ bài (Style giống nút bấm) */
+.match-card-item {
+    background: var(--surface);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+
+    /* Căn chữ vào giữa thẻ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+
+    /* Kích thước */
+    min-height: 100px; /* Chiều cao tối thiểu */
+    aspect-ratio: 3/2; /* Tỷ lệ đẹp mắt */
+
+    /* Font chữ */
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-main);
+
+    /* Hiệu ứng */
+    cursor: pointer;
+    box-shadow: 0 4px 0 var(--border-color); /* Tạo khối 3D nhẹ */
+    transition: all 0.15s ease;
+    user-select: none; /* Không cho bôi đen chữ */
+}
+
+/* Hiệu ứng khi di chuột vào */
+.match-card-item:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+}
+
+/* Hiệu ứng khi bấm xuống */
+.match-card-item:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+/* --- TRẠNG THÁI --- */
+
+/* Đang chọn */
+.match-card-item.selected {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    color: var(--primary);
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--primary);
+}
+
+/* Đã ghép đúng (Ẩn đi) */
+.match-card-item.matched {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+    transition:
+        opacity 0.3s,
+        transform 0.3s;
+}
+
+/* Chọn sai (Rung lắc + Màu đỏ) */
+.match-card-item.wrong {
+    background: #fee2e2;
+    border-color: #ef4444;
+    color: #ef4444;
+    animation: shake 0.4s ease;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 600px) {
+    .match-grid {
+        grid-template-columns: repeat(
+            2,
+            1fr
+        ); /* Trên điện thoại luôn chia 2 cột */
+        gap: 10px;
+    }
+    .match-card-item {
+        min-height: 80px;
+        font-size: 13px;
+        padding: 10px;
+    }
+}
+
+/* Class này sẽ được JS thêm vào khi bấm nút */
+.expanded-note-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.expanded-note-box {
+    width: 800px;
+    height: 80vh;
+    background: var(--surface);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.expanded-textarea {
+    flex: 1;
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+
+    /* 👇 THÊM DÒNG NÀY ĐỂ GIỐNG FONT CHỮ HỆ THỐNG 👇 */
+    font-family: var(--font-main);
+    /* 👆 KẾT THÚC DÒNG THÊM 👆 */
+
+    font-size: 16px;
+    line-height: 1.6;
+    background: rgba(118, 118, 128, 0.12);
+    color: var(--text-main);
+    resize: none;
+    outline: none;
+}
+
+.card-time {
+    grid-column: span 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Responsive Layout mới --- */
+@media (max-width: 1300px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(4, 1fr); /* Tablet chia 4 cột */
+    }
+    .card-welcome {
+        grid-column: span 4;
+    }
+    .card-streak,
+    .card-time,
+    .card-total,
+    .card-stats {
+        grid-column: span 1;
+    }
+    .card-action {
+        grid-column: span 2;
+    }
+    .card-topic {
+        grid-column: span 2;
+    }
+    .practice-zone-container {
+        grid-column: span 4;
+    }
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    .chart-container,
+    .mastery-card,
+    .distribution-card {
+        grid-column: span 1;
+    }
+}
+
+/* --- DICTATION BOARD STYLES --- */
+.dict-board {
+    min-height: 120px;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-content: flex-start;
+}
+.dict-word-chip {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.dict-word-chip:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(99, 102, 241, 0.2);
+}
+#dict-top-board .dict-word-chip {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+#dict-top-board .dict-word-chip.reading {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.05);
+}
+
+/* --- Heatmap Styles (Đã làm đẹp lại) --- */
+.heatmap-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%; /* Full chiều ngang */
+    overflow-x: auto; /* Nếu màn hình quá nhỏ thì cho trượt ngang */
+    padding-bottom: 10px; /* Để khi trượt không bị mất cạnh dưới */
+}
+
+.heatmap-months {
+    display: flex;
+    /* Tự động canh khoảng cách các tháng */
+    justify-content: space-between;
+    margin-left: 35px; /* Thụt vào để tránh cột thứ */
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    padding-bottom: 5px;
+}
+
+.heatmap-body {
+    display: flex;
+    gap: 10px;
+}
+
+.heatmap-days {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Giãn đều các thứ */
+    font-size: 12px;
+    color: var(--text-muted);
+    padding-top: 8px; /* Canh chỉnh cho khớp với hàng ngang */
+    height: 148px; /* Chiều cao cố định khớp với lưới bên phải */
+    font-weight: 500;
+}
+
+.heatmap-grid {
+    display: grid;
+    grid-template-rows: repeat(7, 1fr); /* 7 hàng cho 7 ngày */
+    /* Tự động tính toán số cột, mỗi cột tối thiểu 16px */
+    grid-auto-flow: column;
+    grid-auto-columns: 16px;
+    gap: 6px; /* Khoảng cách giữa các ô rộng ra */
+    flex-grow: 1; /* Chiếm hết không gian còn lại */
+}
+
+.heatmap-day {
+    width: 16px; /* Ô to hơn */
+    height: 16px; /* Ô to hơn */
+    background-color: var(--surface-hover); /* Màu nền mặc định sáng hơn xíu */
+    border-radius: 4px; /* Bo góc hiện đại */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent; /* Viền trong suốt để khi hover không bị nhảy size */
+}
+
+.heatmap-day:hover {
+    transform: scale(1.2); /* Phóng to nhẹ khi di chuột */
+    border-color: var(--accent-purple); /* Hiện viền màu tím */
+    z-index: 2;
+}
+
+/* --- MOBILE & IPHONE 12 PRO MAX OPTIMIZATION --- */
+@media (max-width: 768px) {
+    /* 1. Chuyển Sidebar thành Bottom Navigation */
+    .sidebar {
+        width: 100% !important;
+        min-width: 100% !important;
+        height: 75px !important;
+        flex-direction: row !important;
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        padding: 0 10px !important;
+        border-right: none !important;
+        border-top: 1px solid var(--border-color) !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        background: var(--surface-glass) !important;
+        backdrop-filter: blur(20px) !important;
+        z-index: 1000 !important;
+    }
+
+    /* Ẩn các thành phần không cần thiết trên mobile */
+    .sidebar .logo,
+    .sidebar .divider,
+    .sidebar .theme-toggle,
+    .sidebar .sidebar-toggle-btn,
+    .sidebar .nav-item span {
+        display: none !important;
+    }
+
+    /* Hiện icon to rõ cho Bottom Nav */
+    .sidebar .nav-item {
+        margin-bottom: 0 !important;
+        padding: 12px !important;
+        flex: 1 !important;
+        justify-content: center !important;
+        border-radius: 12px !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    .sidebar .nav-item i {
+        font-size: 26px !important;
+        color: var(--text-muted);
+    }
+
+    .sidebar .nav-item.active i {
+        color: var(--primary) !important;
+    }
+
+    /* 2. Điều chỉnh Main Content để không bị che bởi Bottom Nav */
+    .main-content {
+        padding: 15px 15px 90px 15px !important; /* Đệm dưới 90px */
+    }
+
+    /* 3. Bento Grid: Chuyển về 1 hoặc 2 cột */
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    .card-welcome {
+        grid-column: span 2 !important;
+        padding: 20px !important;
+    }
+
+    .card-action,
+    .practice-zone-container {
+        grid-column: span 2 !important;
+    }
+
+    /* 4. Study Area: Chuyển từ hàng ngang sang hàng dọc */
+    .study-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .flashcard-container {
+        height: 350px !important; /* Thấp hơn một chút cho mobile */
+        margin-bottom: 15px !important;
+    }
+
+    .study-note-panel {
+        height: auto !important;
+        min-height: 200px !important;
+        padding: 16px !important;
+    }
+
+    .word-text {
+        font-size: 32px !important;
+    }
+
+    /* 5. SRS Buttons: Cho chữ nhỏ lại để không bị tràn */
+    .srs-btn {
+        padding: 12px 5px !important;
+        font-size: 13px !important;
+    }
+    .srs-btn span {
+        font-size: 10px !important;
+    }
+
+    /* 6. Modals: Chiếm 95% màn hình */
+    .modal-content {
+        width: 95% !important;
+        padding: 20px !important;
+        margin-bottom: 80px; /* Tránh bị che bởi bàn phím/nav */
+    }
+
+    /* 7. Practice Zones */
+    .practice-grid-inner {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .practice-card {
+        min-height: 110px !important;
+        padding: 15px !important;
+    }
+
+    /* 8. Table Responsive */
+    .admin-panel {
+        padding: 15px !important;
+    }
+
+    .data-table th:nth-child(4),
+    .data-table td:nth-child(4),
+    .data-table th:nth-child(5),
+    .data-table td:nth-child(5) {
+        display: none; /* Ẩn cột Ảnh và Chủ đề trên mobile để đỡ chật */
+    }
+
+    /* iPhone 12 Pro Max Notch/Safe Area */
+    .app-container {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+/* --- TỐI ƯU GHI CHÚ CHO MOBILE --- */
+@media (max-width: 768px) {
+    /* 1. Mặc định ẩn bảng ghi chú và biến nó thành overlay trượt */
+    .study-note-panel {
+        position: fixed !important;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70vh; /* Chiếm 70% chiều cao màn hình */
+        z-index: 2000;
+        margin: 0;
+        border-radius: 24px 24px 0 0 !important;
+        transform: translateY(100%); /* Đẩy xuống dưới màn hình */
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: none !important; /* Ẩn hoàn toàn khi chưa bật */
+        box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 2. Khi có class 'active' thì trượt lên */
+    .study-note-panel.active {
+        display: flex !important;
+        transform: translateY(0);
+    }
+
+    /* 3. Thêm một lớp phủ mờ phía sau khi mở ghi chú */
+    .note-overlay-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1999;
+        display: none;
+    }
+    .note-overlay-bg.show {
+        display: block;
+    }
+}
+
+/* --- TỐI ƯU CHIẾM TRỌN MÀN HÌNH CHO IPHONE 12 PRO MAX --- */
+@media (max-width: 768px) {
+    /* 1. Căn giữa toàn bộ khu vực học tập */
+    .study-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: calc(100vh - 150px) !important; /* Trừ đi header và nav */
+        gap: 40px !important; /* Khoảng cách giữa thẻ và nút bấm */
+        padding: 0 10px !important;
+    }
+
+    /* 2. Phóng to Flashcard */
+    .flashcard-container {
+        width: 100% !important;
+        max-width: 380px !important; /* Gần như chiếm hết chiều ngang iPhone */
+        height: 500px !important; /* Tăng chiều cao thẻ bài */
+        margin-bottom: 0 !important;
+    }
+
+    .word-text {
+        font-size: 48px !important; /* Chữ siêu to khổng lồ */
+    }
+
+    .card-face {
+        padding: 30px !important;
+        border-width: 2px !important; /* Viền dày hơn cho sang */
+    }
+
+    /* 3. Phóng to và dàn đều bộ nút SRS (Dễ bấm bằng ngón cái) */
+    .controls {
+        width: 100% !important;
+        max-width: 380px !important;
+        gap: 15px !important;
+        padding: 0 5px !important;
+    }
+
+    .srs-btn {
+        height: 85px !important; /* Nút cao hơn để dễ chạm */
+        border-radius: 20px !important;
+        font-size: 15px !important;
+    }
+
+    .srs-btn i {
+        font-size: 28px !important; /* Icon to rõ */
+        margin-bottom: 6px !important;
+    }
+
+    .srs-btn span {
+        font-size: 11px !important;
+        font-weight: 800 !important;
+    }
+}
+
+/* --- TỐI ƯU HIỂN THỊ NÚT GHI CHÚ THEO THIẾT BỊ --- */
+
+/* 1. Mặc định: Ẩn nút bóng đèn trên PC */
+#btn-toggle-notes {
+    display: none !important;
+}
+
+/* 2. Trên PC: Luôn hiện bảng ghi chú để học cho tiện */
+@media (min-width: 769px) {
+    .study-note-panel {
+        display: flex !important;
+        position: relative !important;
+        height: auto !important;
+        transform: none !important;
+    }
+}
+
+/* 3. Trên Mobile (iPhone 12 Pro Max...): Hiện nút và ẩn bảng */
+@media (max-width: 768px) {
+    /* Hiện nút bóng đèn */
+    #btn-toggle-notes {
+        display: flex !important;
+    }
+
+    /* Ẩn bảng ghi chú mặc định (để chờ bấm nút mới hiện) */
+    .study-note-panel {
+        display: none !important;
+    }
+
+    /* Khi có class 'active' (do JS thêm vào) thì mới hiện bảng */
+    .study-note-panel.active {
+        display: flex !important;
+    }
+}
+
+/* --- TỐI ƯU GIAO DIỆN MOBILE --- */
+
+@media (max-width: 768px) {
+    /* Ẩn hoàn toàn nút AI Chatbox trên điện thoại */
+    .ai-chat-btn {
+        display: none !important;
+    }
+
+    /* Đảm bảo khung chat cũng không thể mở ra được trên mobile nếu lỡ bấm trúng */
+    .ai-chat-container {
+        display: none !important;
+    }
+
+    #ai-widget-container {
+        display: none !important;
+    }
+}
+
+/* --- TỐI ƯU KHÔNG GIAN HỌC TẬP TRÊN MOBILE --- */
+@media (max-width: 768px) {
+    /* Class để ẩn Sidebar/Taskbar */
+    .sidebar.hide-on-mobile {
+        display: none !important;
+    }
+
+    /* Đưa nội dung chính về sát đáy màn hình khi ẩn Taskbar */
+    .main-content.no-bottom-nav {
+        padding-bottom: 20px !important;
+        height: 100vh !important;
+    }
+}
+
+/* --- HIỆN NÚT ĐỔI MODE TRÊN MOBILE --- */
+@media (max-width: 768px) {
+    /* Cho phép hiện nút theme toggle */
+    .sidebar .theme-toggle {
+        display: flex !important;
+        order: 10; /* Đẩy nó về cuối thanh Bottom Nav */
+    }
+
+    /* Tùy chỉnh icon cho to rõ trên iPhone 12 Pro Max */
+    .theme-toggle i {
+        font-size: 24px !important;
+        color: var(--text-main);
+    }
+}
