@@ -1,0 +1,1483 @@
+[
+    {
+        "word": "How’s it going?",
+        "meaning": "Dùng thay cho \"How are you?\" (Thân mật).",
+        "example": "Hi Nam, how's it going?",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "What’s up?",
+        "meaning": "\"Có chuyện gì thế?\" / \"Sao rồi?\".",
+        "example": "\"What's up, man?\" - \"Not much.\"",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "How have you been?",
+        "meaning": "Hỏi thăm khi lâu ngày không gặp.",
+        "example": "Long time no see! How have you been?",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "What have you been up to?",
+        "meaning": "\"Dạo này làm gì rồi?\"",
+        "example": "What have you been up to lately?",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Nice to meet you",
+        "meaning": "Rất vui được gặp bạn (lần đầu).",
+        "example": "I'm Minh. Nice to meet you.",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "It was nice meeting you",
+        "meaning": "Dùng khi kết thúc lần đầu gặp.",
+        "example": "Goodbye! It was nice meeting you.",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Good to see you",
+        "meaning": "Dùng cho người đã quen.",
+        "example": "Good to see you again, Lan!",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "How’s everything?",
+        "meaning": "\"Mọi thứ ổn chứ?\"",
+        "example": "Hey! How's everything at home?",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Take care",
+        "meaning": "\"Bảo trọng nhé\" (Lời chào tạm biệt).",
+        "example": "See you tomorrow. Take care!",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Take it easy",
+        "meaning": "\"Cứ thong thả\" / \"Bảo trọng\".",
+        "example": "Have a nice weekend. Take it easy!",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "See you later/soon",
+        "meaning": "\"Hẹn gặp lại sau/sớm.\"",
+        "example": "I'm off now. See you later!",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Catch you later",
+        "meaning": "Cách chào thân mật hơn \"See you\".",
+        "example": "I've gotta run. Catch you later!",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’ve got to go/run",
+        "meaning": "\"Tôi phải đi đây/đi gấp.\"",
+        "example": "Sorry, I've got to run now.",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I'm out of here",
+        "meaning": "\"Tôi đi đây\" (Rất thân mật).",
+        "example": "Meeting's over. I'm out of here.",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Have a good one",
+        "meaning": "Chúc một ngày tốt lành.",
+        "example": "Thanks for coming. Have a good one!",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Likewise",
+        "meaning": "\"Tôi cũng vậy\" (Đáp lại lời chúc).",
+        "example": "\"Nice to meet you.\" - \"Likewise.\"",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "How about you?",
+        "meaning": "\"Còn bạn thì sao?\"",
+        "example": "I'm great. How about you?",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "What about you?",
+        "meaning": "Tương tự \"How about you?\".",
+        "example": "I'm a student. What about you?",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Long time no see",
+        "meaning": "\"Lâu rồi không gặp.\"",
+        "example": "Long time no see! How's life?",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Welcome back",
+        "meaning": "\"Chào mừng quay trở lại.\"",
+        "example": "Welcome back from your trip!",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Keep in touch",
+        "meaning": "\"Giữ liên lạc nhé.\"",
+        "example": "It was great talking to you. Keep in touch!",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Let me introduce myself",
+        "meaning": "\"Để tôi tự giới thiệu.\"",
+        "example": "Let me introduce myself, I'm An.",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "This is my friend",
+        "meaning": "\"Đây là bạn tôi.\"",
+        "example": "Hi Mom, this is my friend, Minh.",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’d like you to meet...",
+        "meaning": "\"Tôi muốn giới thiệu bạn với...\"",
+        "example": "I'd like you to meet my boss.",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’ve heard a lot about you",
+        "meaning": "\"Nghe danh bạn đã lâu.\"",
+        "example": "Nice to meet you! I've heard a lot about you.",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Have we met before?",
+        "meaning": "\"Chúng ta gặp nhau chưa nhỉ?\"",
+        "example": "You look familiar. Have we met before?",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m originally from...",
+        "meaning": "\"Tôi vốn dĩ đến từ...\"",
+        "example": "I'm originally from Da Nang.",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Where are you from?",
+        "meaning": "\"Bạn đến từ đâu?\"",
+        "example": "Nice accent! Where are you from?",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Peace out",
+        "meaning": "\"Tạm biệt\" (Tiếng lóng trẻ trung).",
+        "example": "See ya tomorrow. Peace out!",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Talk to you later",
+        "meaning": "\"Nói chuyện sau nhé.\"",
+        "example": "I'm busy now. Talk to you later.",
+        "topic": "Chào hỏi & Tạm biệt",
+        "stage": "1",
+        "type": "phrase"
+    },
+
+    {
+        "word": "You’re welcome",
+        "meaning": "\"Không có chi.\"",
+        "example": "\"Thanks!\" - \"You're welcome.\"",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "No problem",
+        "meaning": "\"Không vấn đề gì.\"",
+        "example": "\"Thanks for the help.\" - \"No problem.\"",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "No worries",
+        "meaning": "Tương tự \"No problem\".",
+        "example": "\"Sorry for being late.\" - \"No worries.\"",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "My pleasure",
+        "meaning": "\"Niềm vinh hạnh của tôi.\"",
+        "example": "\"Thanks for dinner!\" - \"My pleasure.\"",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Don’t mention it",
+        "meaning": "\"Đừng bận tâm/Không có gì.\"",
+        "example": "\"Thank you so much!\" - \"Don't mention it.\"",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I owe you one",
+        "meaning": "\"Tôi nợ bạn một lần giúp đỡ.\"",
+        "example": "\"Thanks for the lift. I owe you one.\"",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Anytime",
+        "meaning": "\"Bất cứ lúc nào\" (Sẵn lòng giúp).",
+        "example": "\"Thanks again!\" - \"Anytime.\"",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m so sorry",
+        "meaning": "Xin lỗi chân thành.",
+        "example": "I'm so sorry for the delay.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Excuse me",
+        "meaning": "Xin lỗi/Cho hỏi.",
+        "example": "Excuse me, where is the lab?",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Pardon me",
+        "meaning": "Xin lỗi (Trang trọng hơn).",
+        "example": "Pardon me, could I pass through?",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Oops, sorry",
+        "meaning": "Xin lỗi (Lỗi rất nhỏ).",
+        "example": "Oops, sorry, I dropped your pen.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "It’s my fault",
+        "meaning": "\"Lỗi tại tôi.\"",
+        "example": "\"The door is open? It's my fault.\"",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Never mind",
+        "meaning": "\"Đừng bận tâm/Bỏ qua đi.\"",
+        "example": "\"I forgot the book.\" - \"Never mind.\"",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Don’t sweat it",
+        "meaning": "\"Đừng lo lắng/Chuyện nhỏ.\"",
+        "example": "\"I'm 5 minutes late.\" - \"Don't sweat it.\"",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "It’s not a big deal",
+        "meaning": "\"Không có gì to tát đâu.\"",
+        "example": "It's not a big deal, we can fix it.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Hang on a second",
+        "meaning": "\"Đợi một chút.\"",
+        "example": "Hang on a second, let me check.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Hold on a minute",
+        "meaning": "Tương tự \"Hang on\".",
+        "example": "Hold on a minute, I'm coming!",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Just a moment",
+        "meaning": "\"Chờ một lát.\"",
+        "example": "Just a moment, please.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I see what you mean",
+        "meaning": "\"Tôi hiểu ý bạn.\"",
+        "example": "I see what you mean, but I disagree.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "That makes sense",
+        "meaning": "\"Điều đó hợp lý đấy.\"",
+        "example": "\"Oh, I get it now. That makes sense.\"",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I completely agree",
+        "meaning": "\"Tôi hoàn toàn đồng ý.\"",
+        "example": "I completely agree with your point.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "You’re absolutely right",
+        "meaning": "\"Bạn hoàn toàn đúng.\"",
+        "example": "You're absolutely right about him.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "That’s a great point",
+        "meaning": "\"Đó là một ý hay.\"",
+        "example": "That's a great point, let's do it.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m not so sure",
+        "meaning": "\"Tôi không chắc lắm\" (Phản đối).",
+        "example": "I'm not so sure about that idea.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "To be honest",
+        "meaning": "\"Thú thật là...\"",
+        "example": "To be honest, I don't like it.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Actually...",
+        "meaning": "\"Thực ra là...\"",
+        "example": "Actually, the shop is closed.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "By the way",
+        "meaning": "\"Nhân tiện thì...\"",
+        "example": "By the way, have you seen Lan?",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "In my opinion",
+        "meaning": "\"Theo ý kiến của tôi.\"",
+        "example": "In my opinion, we should wait.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "As far as I know",
+        "meaning": "\"Theo như tôi biết.\"",
+        "example": "As far as I know, he is away.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I have no idea",
+        "meaning": "\"Tôi không có ý niệm gì (không biết).\"",
+        "example": "\"Where is he?\" - \"I have no idea.\"",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Beats me",
+        "meaning": "\"Chịu/Không biết\" (Thân mật).",
+        "example": "\"How does this work?\" - \"Beats me.\"",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "What do you think?",
+        "meaning": "\"Bạn nghĩ sao?\"",
+        "example": "\"I want to quit. What do you think?\"",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Does that make sense?",
+        "meaning": "\"Tôi nói có dễ hiểu không?\"",
+        "example": "\"I'll try again. Does that make sense?\"",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I don't follow you",
+        "meaning": "\"Tôi không theo kịp ý bạn.\"",
+        "example": "Sorry, I don't follow you.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I didn't catch that",
+        "meaning": "\"Tôi nghe không rõ/kịp.\"",
+        "example": "It's noisy. I didn't catch that.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Could you say that again?",
+        "meaning": "\"Bạn nói lại được không?\"",
+        "example": "Could you say that again, please?",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Speak a bit slower",
+        "meaning": "\"Nói chậm lại một chút.\"",
+        "example": "Can you speak a bit slower?",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "What does mean?",
+        "meaning": "\"... nghĩa là gì?\"",
+        "example": "What does 'deadline' mean?",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "How do you spell that?",
+        "meaning": "\"Từ đó đánh vần thế nào?\"",
+        "example": "How do you spell your name?",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Let me see...",
+        "meaning": "\"Để tôi xem nào...\" (Câu giờ).",
+        "example": "Let me see, I think it's here.",
+        "topic": "Lịch sự & Phản hồi",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "What do you do?",
+        "meaning": "\"Bạn làm nghề gì?\"",
+        "example": "Nice to meet you. What do you do?",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "What do you do for a living?",
+        "meaning": "\"Bạn làm gì để kiếm sống?\"",
+        "example": "So, what do you do for a living?",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I work as a...",
+        "meaning": "\"Tôi làm việc với tư cách là...\"",
+        "example": "I work as a designer.",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m in between jobs",
+        "meaning": "\"Tôi đang chờ việc/nghỉ ngơi.\"",
+        "example": "Currently, I'm in between jobs.",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I'm retired",
+        "meaning": "\"Tôi đã nghỉ hưu.\"",
+        "example": "I was a teacher. Now I'm retired.",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m a stay-at-home mom/dad",
+        "meaning": "\"Tôi làm nội trợ.\"",
+        "example": "I'm a stay-at-home mom now.",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Free time",
+        "meaning": "\"Thời gian rảnh.\"",
+        "example": "What do you do in your free time?",
+        "topic": "Sở thích & Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m really into...",
+        "meaning": "\"Tôi cực kỳ thích...\"",
+        "example": "I'm really into photography.",
+        "topic": "Sở thích & Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m a big fan of...",
+        "meaning": "\"Tôi là fan lớn của...\"",
+        "example": "I'm a big fan of Marvel movies.",
+        "topic": "Sở thích & Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m not a big fan of...",
+        "meaning": "\"Tôi không thích... lắm.\"",
+        "example": "I'm not a big fan of spicy food.",
+        "topic": "Sở thích & Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "My favorite is...",
+        "meaning": "\"... là cái yêu thích nhất của tôi.\"",
+        "example": "My favorite color is blue.",
+        "topic": "Sở thích & Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I enjoy...",
+        "meaning": "\"Tôi tận hưởng/thích...\"",
+        "example": "I enjoy listening to podcasts.",
+        "topic": "Sở thích & Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I adore...",
+        "meaning": "\"Tôi yêu quý/ngưỡng mộ...\"",
+        "example": "I adore my grandmother.",
+        "topic": "Sở thích & Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I can't stand...",
+        "meaning": "\"Tôi không thể chịu nổi...\"",
+        "example": "I can't stand loud music.",
+        "topic": "Sở thích & Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I don't mind...",
+        "meaning": "\"Tôi không ngại/không phiền.\"",
+        "example": "I don't mind waiting for you.",
+        "topic": "Sở thích & Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "How's your family?",
+        "meaning": "\"Gia đình bạn thế nào?\"",
+        "example": "Long time no see. How's your family?",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I have siblings",
+        "meaning": "\"Tôi có anh chị em.\"",
+        "example": "I have three siblings, 2 sisters.",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "We’ve been friends for years",
+        "meaning": "\"Chúng tôi là bạn nhiều năm.\"",
+        "example": "We've been friends for years.",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m really close to my...",
+        "meaning": "\"Tôi rất thân với...\"",
+        "example": "I'm really close to my sister.",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Let’s hang out soon",
+        "meaning": "\"Sớm đi chơi nhé.\"",
+        "example": "I miss you. Let's hang out soon!",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Where do you live?",
+        "meaning": "\"Bạn sống ở đâu?\"",
+        "example": "I live in Dist 1. Where do you live?",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I live with my parents",
+        "meaning": "\"Tôi sống với bố mẹ.\"",
+        "example": "I live with my parents in the city.",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m looking for...",
+        "meaning": "\"Tôi đang tìm kiếm...\"",
+        "example": "I'm looking for a new job.",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Are you married?",
+        "meaning": "\"Bạn kết hôn chưa?\"",
+        "example": "Excuse me, are you married?",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I have kids",
+        "meaning": "\"Tôi có con rồi.\"",
+        "example": "I have two kids, a boy and a girl.",
+        "topic": "Thông tin Cá nhân",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "What's your hobby?",
+        "meaning": "\"Sở thích của bạn là gì?\"",
+        "example": "What's your hobby, Lan?",
+        "topic": "Sở thích & Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "In my free time, I...",
+        "meaning": "\"Vào lúc rảnh, tôi...\"",
+        "example": "In my free time, I go swimming.",
+        "topic": "Sở thích & Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I'm interested in...",
+        "meaning": "\"Tôi quan tâm đến...\"",
+        "example": "I'm interested in learning English.",
+        "topic": "Sở thích & Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "It depends on...",
+        "meaning": "\"Nó tùy thuộc vào...\"",
+        "example": "\"Will you go?\" - \"It depends on the weather.\"",
+        "topic": "Sở thích & Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Good for you!",
+        "meaning": "\"Tốt cho bạn!\" (Chúc mừng).",
+        "example": "\"I got the job!\" - \"Good for you!\"",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m so proud of you",
+        "meaning": "\"Tôi rất tự hào về bạn.\"",
+        "example": "Well done! I'm so proud of you.",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "That’s a shame/pity",
+        "meaning": "\"Thật đáng tiếc.\"",
+        "example": "\"I can't come.\" - \"That's a shame.\"",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m looking forward to...",
+        "meaning": "\"Tôi đang mong chờ...\"",
+        "example": "I'm looking forward to the party.",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Can you give me a hand?",
+        "meaning": "\"Bạn giúp tôi một tay được không?\"",
+        "example": "This is heavy. Can you give me a hand?",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I was wondering if...",
+        "meaning": "\"Tôi tự hỏi liệu...\" (Hỏi lịch sự).",
+        "example": "I was wondering if I could stay.",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Do you mind if I...?",
+        "meaning": "\"Bạn có phiền nếu tôi...?\"",
+        "example": "Do you mind if I sit here?",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Could you please...?",
+        "meaning": "\"Bạn có thể vui lòng...?\"",
+        "example": "Could you please lower the volume?",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’ll let you know",
+        "meaning": "\"Tôi sẽ cho bạn biết.\"",
+        "example": "I'll check and I'll let you know.",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’ll get back to you soon",
+        "meaning": "\"Tôi sẽ phản hồi bạn sớm.\"",
+        "example": "I'm busy, I'll get back to you soon.",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’ll call you back",
+        "meaning": "\"Tôi sẽ gọi lại sau.\"",
+        "example": "Sorry, I'll call you back in 5 mins.",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "What's new?",
+        "meaning": "\"Có gì mới không?\"",
+        "example": "Hey Minh! What's new?",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Same as always",
+        "meaning": "\"Vẫn như mọi khi.\"",
+        "example": "\"How's work?\" - \"Same as always.\"",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Can't complain",
+        "meaning": "\"Không có gì để phàn nàn\" (Rất ổn).",
+        "example": "\"How are you?\" - \"Can't complain!\"",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Same old, same old",
+        "meaning": "\"Vẫn thế thôi\" (Hơi nhàm chán).",
+        "example": "\"How's life?\" - \"Same old, same old.\"",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Nice try",
+        "meaning": "\"Cố gắng tốt đấy\" (An ủi).",
+        "example": "You failed? Nice try, next time!",
+        "topic": "Giao tiếp Đời sống",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m feeling great!",
+        "meaning": "Tôi thấy tuyệt vời!",
+        "example": "Sun is shining and I'm feeling great!",
+        "topic": "Cảm xúc & Sức khỏe",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m a bit tired",
+        "meaning": "Tôi hơi mệt.",
+        "example": "Long day. I'm a bit tired now.",
+        "topic": "Cảm xúc & Sức khỏe",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Under the weather",
+        "meaning": "Cảm thấy không khỏe/mệt.",
+        "example": "I can't go. I'm under the weather.",
+        "topic": "Cảm xúc & Sức khỏe",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I have a headache",
+        "meaning": "Tôi bị đau đầu.",
+        "example": "Too much noise. I have a headache.",
+        "topic": "Cảm xúc & Sức khỏe",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I have a stomachache",
+        "meaning": "Tôi bị đau bụng.",
+        "example": "Bad food. I have a stomachache.",
+        "topic": "Cảm xúc & Sức khỏe",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I'm feeling dizzy",
+        "meaning": "Tôi thấy chóng mặt.",
+        "example": "I need to sit down. I'm feeling dizzy.",
+        "topic": "Cảm xúc & Sức khỏe",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m hungry/thirsty",
+        "meaning": "Tôi đói/khát.",
+        "example": "Let's eat, I'm hungry.",
+        "topic": "Cảm xúc & Sức khỏe",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I'm full",
+        "meaning": "Tôi no rồi.",
+        "example": "No more for me, I'm full.",
+        "topic": "Cảm xúc & Sức khỏe",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m exhausted",
+        "meaning": "Tôi kiệt sức rồi.",
+        "example": "After the marathon, I'm exhausted.",
+        "topic": "Cảm xúc & Sức khỏe",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m stressed out",
+        "meaning": "Tôi đang bị stress.",
+        "example": "Too much work. I'm stressed out.",
+        "topic": "Cảm xúc & Sức khỏe",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Don’t worry",
+        "meaning": "Đừng lo lắng.",
+        "example": "Don't worry, everything will be fine.",
+        "topic": "Cảm xúc & Sức khỏe",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Calm down",
+        "meaning": "Bình tĩnh lại.",
+        "example": "Calm down, let's talk slowly.",
+        "topic": "Cảm xúc & Sức khỏe",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Take it easy",
+        "meaning": "Thoải mái đi/Đừng quá sức.",
+        "example": "You work too much. Take it easy.",
+        "topic": "Cảm xúc & Sức khỏe",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Stay strong",
+        "meaning": "Hãy mạnh mẽ lên.",
+        "example": "I know it's hard. Stay strong!",
+        "topic": "Cảm xúc & Sức khỏe",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Stay safe",
+        "meaning": "Hãy giữ an toàn.",
+        "example": "Goodbye! Stay safe on the road.",
+        "topic": "Cảm xúc & Sức khỏe",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Watch out!",
+        "meaning": "Cẩn thận kìa! (Nguy hiểm).",
+        "example": "Watch out! A car is coming!",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Be careful",
+        "meaning": "Hãy cẩn thận.",
+        "example": "Be careful with that knife.",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Help me!",
+        "meaning": "Giúp tôi với!",
+        "example": "Help me! I'm lost.",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m lost",
+        "meaning": "Tôi bị lạc.",
+        "example": "Where am I? I'm lost.",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I messed up",
+        "meaning": "Tôi làm hỏng chuyện rồi.",
+        "example": "I forgot the keys. I messed up.",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m so happy for you",
+        "meaning": "Tôi rất mừng cho bạn.",
+        "example": "You got a gift? I'm so happy for you!",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m so sorry to hear that",
+        "meaning": "Tôi rất tiếc khi nghe chuyện đó.",
+        "example": "I'm so sorry to hear that news.",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "That sounds fun!",
+        "meaning": "Nghe có vẻ vui đó!",
+        "example": "Let's go camping! - That sounds fun!",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "That’s great/awesome!",
+        "meaning": "Thật tuyệt vời!",
+        "example": "I passed! - That's awesome!",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "That’s funny!",
+        "meaning": "Buồn cười thật!",
+        "example": "He told a joke. That's funny!",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "What happened?",
+        "meaning": "Chuyện gì đã xảy ra vậy?",
+        "example": "You look sad. What happened?",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "What's the problem?",
+        "meaning": "Vấn đề là gì?",
+        "example": "What's the problem with the car?",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "What's the matter?",
+        "meaning": "Có chuyện gì vậy?",
+        "example": "What's the matter? You're crying.",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "It’s no use",
+        "meaning": "Vô ích thôi.",
+        "example": "It's no use trying to fix it.",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "It’s too late",
+        "meaning": "Đã quá muộn rồi.",
+        "example": "Sorry, it's too late to join.",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Go for it!",
+        "meaning": "Cứ làm đi/Thử đi!",
+        "example": "I want to ask her. - Go for it!",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Keep it up!",
+        "meaning": "Cứ tiếp tục phát huy!",
+        "example": "You're doing great. Keep it up!",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Never give up",
+        "meaning": "Đừng bao giờ bỏ cuộc.",
+        "example": "English is hard, but never give up.",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m all ears",
+        "meaning": "Tôi đang chăm chú lắng nghe đây.",
+        "example": "Tell me the story. I'm all ears.",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I can't wait!",
+        "meaning": "Tôi không thể chờ đợi thêm nữa.",
+        "example": "I can't wait for the weekend!",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I’m in!",
+        "meaning": "Tôi tham gia với!",
+        "example": "Going for coffee? I'm in!",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "No way!",
+        "meaning": "Không đời nào! / Thật không thể tin!",
+        "example": "You won 1 million? No way!",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "I doubt it",
+        "meaning": "Tôi nghi ngờ điều đó.",
+        "example": "Will it rain? - I doubt it.",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Believe it or not",
+        "meaning": "Tin hay không tùy bạn.",
+        "example": "Believe it or not, I met a star.",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Are we done?",
+        "meaning": "Chúng ta xong chưa?",
+        "example": "It's 5 PM. Are we done?",
+        "topic": "Phản ứng nhanh",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Wake up",
+        "meaning": "Thức dậy.",
+        "example": "I wake up at 6 AM.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Get up",
+        "meaning": "Rời khỏi giường.",
+        "example": "I wake up but I don't get up.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Get ready",
+        "meaning": "Chuẩn bị sẵn sàng.",
+        "example": "I need 10 mins to get ready.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Go to bed",
+        "meaning": "Đi ngủ.",
+        "example": "I'm tired, I'll go to bed early.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Take a shower",
+        "meaning": "Đi tắm (vòi sen).",
+        "example": "I always take a shower in the morning.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Take a break",
+        "meaning": "Nghỉ giải lao.",
+        "example": "Let's take a break for coffee.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Make a decision",
+        "meaning": "Đưa ra quyết định.",
+        "example": "It's hard to make a decision.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Make a mistake",
+        "meaning": "Phạm sai lầm.",
+        "example": "It's okay to make a mistake.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Make sense",
+        "meaning": "Có lý/Dễ hiểu.",
+        "example": "Your explanation makes sense.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Make sure",
+        "meaning": "Đảm bảo chắc chắn.",
+        "example": "Make sure you lock the door.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Make progress",
+        "meaning": "Có tiến bộ.",
+        "example": "You are making progress in English.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Do homework",
+        "meaning": "Làm bài tập về nhà.",
+        "example": "I have to do homework tonight.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Do a favor",
+        "meaning": "Giúp một ân huệ/việc gì đó.",
+        "example": "Can you do me a favor?",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Take a seat",
+        "meaning": "Ngồi xuống.",
+        "example": "Please take a seat and wait.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Take a look",
+        "meaning": "Nhìn xem qua.",
+        "example": "Can you take a look at this report?",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Have a look",
+        "meaning": "Tương tự \"Take a look\".",
+        "example": "Let's have a look at the photos.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Have fun",
+        "meaning": "Chúc vui vẻ.",
+        "example": "Goodbye! Have fun at the party!",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Have time",
+        "meaning": "Có thời gian.",
+        "example": "Do you have time for a chat?",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Have a meal",
+        "meaning": "Dùng bữa.",
+        "example": "We had a great meal together.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Get home",
+        "meaning": "Về nhà.",
+        "example": "I usually get home at 7 PM.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Get on (the bus)",
+        "meaning": "Lên (xe buýt, tàu...).",
+        "example": "I'm getting on the bus now.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Get off (the bus)",
+        "meaning": "Xuống (xe buýt, tàu...).",
+        "example": "I'm getting off at the next stop.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Give up",
+        "meaning": "Từ bỏ.",
+        "example": "Don't give up on your dreams.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Go out",
+        "meaning": "Đi chơi/Ra ngoài.",
+        "example": "Do you want to go out tonight?",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Come back",
+        "meaning": "Quay lại.",
+        "example": "Please come back soon.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Turn on",
+        "meaning": "Bật (thiết bị).",
+        "example": "Can you turn on the lights?",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Turn off",
+        "meaning": "Tắt (thiết bị).",
+        "example": "Don't forget to turn off the TV.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Pick up",
+        "meaning": "Nhặt lên/Đón ai đó.",
+        "example": "I need to pick up my kids.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Look for",
+        "meaning": "Tìm kiếm.",
+        "example": "I'm looking for my keys.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    },
+    {
+        "word": "Look up",
+        "meaning": "Tra cứu thông tin.",
+        "example": "Look up the word in a dictionary.",
+        "topic": "Hành động & Đời thường",
+        "stage": "1",
+        "type": "phrase"
+    }
+]
