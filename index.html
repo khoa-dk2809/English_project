@@ -4263,11 +4263,18 @@
                     appState = JSON.parse(savedData);
                     if (!appState.cards || appState.cards.length === 0)
                         appState.cards = seedData;
-                    if (!appState.readings) appState.readings = seedReadings; // Init readings if missing
+                    if (!appState.readings) appState.readings = seedReadings;
                 } else {
+                    // NẾU LÀ NGƯỜI DÙNG MỚI (HOẶC MÁY MỚI)
                     appState.cards = seedData;
                     appState.readings = seedReadings;
-                    saveData();
+
+                    // --- SỬA LỖI RESET DATA ---
+                    // Chỉ lưu vào localStorage, KHÔNG gọi saveData() để tránh ghi đè lên Cloud
+                    localStorage.setItem(
+                        "engmist_data",
+                        JSON.stringify(appState),
+                    );
                 }
                 if (!appState.dailyLogs) appState.dailyLogs = {};
                 if (!appState.dailyTime) appState.dailyTime = {};
