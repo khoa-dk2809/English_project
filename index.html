@@ -125,6 +125,7 @@
                                     <select
                                         id="target-type"
                                         class="quest-input"
+                                        onchange="updateQuestConfig()"
                                     >
                                         <option value="words">
                                             Số từ vựng
@@ -9131,17 +9132,23 @@
         setTimeout(initDailyQuest, 1000);
 
         // 3. Xử lý khi chỉnh sửa cài đặt
+        // 3. Xử lý khi chỉnh sửa cài đặt
         window.updateQuestConfig = function () {
-            appState.challenge.type =
-                document.getElementById("target-type").value;
-            appState.challenge.target =
-                document.getElementById("target-val").value;
+            // Lấy giá trị từ input
+            const type = document.getElementById("target-type").value;
+            let target = parseInt(document.getElementById("target-val").value);
+
+            // Validate: Không cho nhập số âm hoặc 0
+            if (!target || target < 1) target = 1;
+
+            // Cập nhật State
+            appState.challenge.type = type;
+            appState.challenge.target = target;
+
+            // Lưu và Vẽ lại (để cập nhật thanh tiến độ theo mục tiêu mới)
             renderQuestUI();
             saveData();
         };
-
-        // 4. 🔥 QUAN TRỌNG: Tự động bắt sự kiện bấm nút 🔥
-        document.addEventListener("click", function (e) {});
 
         /* =========================================
            LOGIC BIỂU ĐỒ QUEST (STYLE GIỐNG TIME CHART)
