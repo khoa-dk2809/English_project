@@ -108,45 +108,74 @@
                 <!-- View: Dashboard -->
                 <div id="dashboard-view">
                     <div class="dashboard-grid">
-                        <div class="bento-card card-welcome">
-                            <div class="firework-1"></div>
-                            <div class="firework-2"></div>
+                        <div class="bento-card daily-quest-card">
+                            <div class="quest-header">
+                                <div class="quest-info">
+                                    <h2>🎯 Daily Quest</h2>
+                                    <p>Hoàn thành mục tiêu để duy trì chuỗi!</p>
+                                </div>
+                                <span id="quest-badge" class="quest-badge"
+                                    >Chưa bắt đầu</span
+                                >
+                            </div>
 
-                            <div class="tet-decor-left"></div>
-                            <div class="tet-decor-right"></div>
-
-                            <div class="welcome-content">
-                                <h2>
-                                    Hello, <span id="user-name">Khoa</span>! 👋
-                                </h2>
-                                <p style="margin-top: 5px; opacity: 0.9">
-                                    Khai bút đầu xuân - Từ vựng tuôn trào! ✍️
-                                </p>
-
-                                <div style="margin-top: 20px">
-                                    <span
-                                        style="
-                                            background: rgba(
-                                                255,
-                                                255,
-                                                255,
-                                                0.15
-                                            );
-                                            padding: 6px 14px;
-                                            border-radius: 20px;
-                                            font-size: 13px;
-                                            font-weight: 700;
-                                            border: 1px solid
-                                                rgba(255, 240, 0, 0.3); /* Viền vàng nhẹ */
-                                            backdrop-filter: blur(4px);
-                                            color: #fffbeb;
-                                            display: inline-flex;
-                                            align-items: center;
-                                            gap: 6px;
-                                        "
+                            <div id="quest-settings" class="quest-options">
+                                <div class="input-group">
+                                    <label>Loại thử thách</label>
+                                    <select
+                                        id="target-type"
+                                        class="quest-input"
                                     >
-                                        🌸 Xuân Bính Ngọ 2026
-                                    </span>
+                                        <option value="words">
+                                            Số từ vựng
+                                        </option>
+                                        <option value="time">
+                                            Thời gian (Phút)
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label>Mục tiêu</label>
+                                    <input
+                                        type="number"
+                                        id="target-val"
+                                        value="20"
+                                        min="1"
+                                        class="quest-input"
+                                    />
+                                </div>
+                            </div>
+
+                            <button
+                                id="btn-start-quest"
+                                onclick="startChallenge()"
+                                class="quest-btn start-btn"
+                            >
+                                🚀 Bắt đầu Thử Thách
+                            </button>
+
+                            <button
+                                id="btn-reset-quest"
+                                onclick="resetChallenge()"
+                                class="quest-btn reset-btn"
+                                style="display: none"
+                            >
+                                ✨ Tạo thử thách mới
+                            </button>
+
+                            <div
+                                id="quest-progress-area"
+                                class="quest-progress"
+                            >
+                                <div class="progress-labels">
+                                    <span id="quest-count">0 / 20</span>
+                                    <span id="quest-percent">0%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div
+                                        id="quest-bar"
+                                        class="progress-fill"
+                                    ></div>
                                 </div>
                             </div>
                         </div>
@@ -680,6 +709,81 @@
                                 "
                             ></div>
                         </div>
+
+                        <div class="quest-header" style="margin-bottom: 25px">
+                            <div class="quest-info">
+                                <h2>🎯 Daily Quest</h2>
+                                <p>Thống kê 7 ngày gần nhất</p>
+                            </div>
+                            <div
+                                style="
+                                    display: flex;
+                                    gap: 8px;
+                                    font-size: 11px;
+                                    font-weight: 600;
+                                "
+                            >
+                                <div
+                                    style="
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 4px;
+                                    "
+                                >
+                                    <div
+                                        style="
+                                            width: 8px;
+                                            height: 8px;
+                                            border-radius: 50%;
+                                            background: var(--primary);
+                                        "
+                                    ></div>
+                                    Từ vựng
+                                </div>
+                                <div
+                                    style="
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 4px;
+                                    "
+                                >
+                                    <div
+                                        style="
+                                            width: 8px;
+                                            height: 8px;
+                                            border-radius: 50%;
+                                            background: var(--accent-orange);
+                                        "
+                                    ></div>
+                                    Thời gian
+                                </div>
+                            </div>
+                        </div>
+
+                        <button
+                            id="btn-start-quest"
+                            onclick="startChallenge()"
+                            class="quest-btn start-btn"
+                            style="margin-bottom: 20px"
+                        >
+                            🚀 Bắt đầu / Cập nhật
+                        </button>
+
+                        <div
+                            id="quest-chart-area"
+                            style="
+                                display: flex;
+                                align-items: flex-end;
+                                justify-content: space-between;
+                                height: 160px; /* Chiều cao cố định */
+                                padding-top: 10px;
+                                gap: 4px;
+                                border-top: 1px solid var(--border-color);
+                                margin-top: 10px;
+                                margin-bottom: 30px;
+                            "
+                        ></div>
+
                         <div
                             class="distribution-card"
                             style="
@@ -4293,6 +4397,8 @@
                 appState.readings = seedReadings;
                 saveData();
             }
+
+            initDailyChallenge();
         }
 
         function renderTopicOptions() {
@@ -4938,29 +5044,29 @@
                 }
 
                 const barHtml = `
-            <div style="display: flex; flex-direction: column; align-items: center; flex: 1; transition: 0.3s;">
-                <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 5px; font-weight: 700; opacity: ${timeInMinutes > 0 ? 1 : 0};">
-                    ${timeInMinutes}p
-                </div>
-                <div style="width: 100%; max-width: 35px; height: 100px; background: var(--border-color); border-radius: 8px; position: relative; overflow: hidden; cursor: pointer;" title="Ngày ${dateMonthLabel}: ${timeInMinutes} phút">
-                    <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: ${heightPercent}%; background: var(--primary-gradient); border-radius: 8px; transition: height 0.5s ease-out;"></div>
-                </div>
-                <div style="font-size: 11px; font-weight: 600; color: ${day === realTodayStr ? "var(--accent-purple)" : "var(--text-main)"}; margin-top: 8px; text-align: center; line-height: 1.4;">
-                    ${shortDay}<br>
-                    <span style="font-weight: 400; font-size: 10px; color: var(--text-muted);">${dateMonthLabel}</span>
-                </div>
-            </div>
-        `;
+                    <div style="display: flex; flex-direction: column; align-items: center; flex: 1; transition: 0.3s;">
+                        <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 5px; font-weight: 700; opacity: ${timeInMinutes > 0 ? 1 : 0};">
+                            ${timeInMinutes}p
+                        </div>
+                        <div style="width: 100%; max-width: 35px; height: 100px; background: var(--border-color); border-radius: 8px; position: relative; overflow: hidden; cursor: pointer;" title="Ngày ${dateMonthLabel}: ${timeInMinutes} phút">
+                            <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: ${heightPercent}%; background: var(--primary-gradient); border-radius: 8px; transition: height 0.5s ease-out;"></div>
+                        </div>
+                        <div style="font-size: 11px; font-weight: 600; color: ${day === realTodayStr ? "var(--accent-purple)" : "var(--text-main)"}; margin-top: 8px; text-align: center; line-height: 1.4;">
+                            ${shortDay}<br>
+                            <span style="font-weight: 400; font-size: 10px; color: var(--text-muted);">${dateMonthLabel}</span>
+                        </div>
+                    </div>
+                `;
                 chartContainer.insertAdjacentHTML("beforeend", barHtml);
             });
         }
 
         function renderStats() {
             /* =========================================
-               PHẦN 1: BIỂU ĐỒ CỘT (LEVEL CHART)
-               - Tự động chọn thang đo (Scale) phù hợp
-               - Có lưới ngang và trục tung
-               ========================================= */
+                       PHẦN 1: BIỂU ĐỒ CỘT (LEVEL CHART)
+                       - Tự động chọn thang đo (Scale) phù hợp
+                       - Có lưới ngang và trục tung
+                       ========================================= */
             renderDailyTimeChart();
             // 1. Tính toán số lượng từ theo 4 cấp độ
             const level1 = appState.cards.filter(
@@ -5064,10 +5170,10 @@
                     colWrapper.className = "chart-col-wrapper";
 
                     colWrapper.innerHTML = `
-                        <div class="chart-val-top" style="color: ${item.color}">${item.count}</div>
-                        <div class="chart-bar-col" style="height: ${heightPercent}%; background-color: ${item.color};" title="${item.label}: ${item.count}"></div>
-                        <div class="chart-label-bottom">${item.label}</div>
-                    `;
+                                <div class="chart-val-top" style="color: ${item.color}">${item.count}</div>
+                                <div class="chart-bar-col" style="height: ${heightPercent}%; background-color: ${item.color};" title="${item.label}: ${item.count}"></div>
+                                <div class="chart-label-bottom">${item.label}</div>
+                            `;
 
                     chartArea.appendChild(colWrapper);
                 });
@@ -5082,8 +5188,8 @@
             }
 
             /* =========================================
-               PHẦN 2: BIỂU ĐỒ NHIỆT (GITHUB STYLE MÀU XANH CŨ & FULL CHIỀU NGANG)
-               ========================================= */
+                       PHẦN 2: BIỂU ĐỒ NHIỆT (GITHUB STYLE MÀU XANH CŨ & FULL CHIỀU NGANG)
+                       ========================================= */
             const heatmapContainer =
                 document.getElementById("contribution-graph");
             if (heatmapContainer) {
@@ -5207,24 +5313,24 @@
                     ? "rgba(0, 0, 0, 0.04)"
                     : "rgba(255, 255, 255, 0.05)";
                 legend.innerHTML = `
-                    <span>Ít</span>
-                    <div style="width: 14px; height: 14px; border-radius: 4px; background: ${emptyColor};"></div>
-                    <div style="width: 14px; height: 14px; border-radius: 4px; background: #d3f9d8;" title="Dưới 20 XP"></div>
-                    <div style="width: 14px; height: 14px; border-radius: 4px; background: #9be9a8;" title="20 - 50 XP"></div>
-                    <div style="width: 14px; height: 14px; border-radius: 4px; background: #40c463;" title="50 - 100 XP"></div>
-                    <div style="width: 14px; height: 14px; border-radius: 4px; background: #30a14e;" title="100 - 200 XP"></div>
-                    <div style="width: 14px; height: 14px; border-radius: 4px; background: #216e39;" title="Trên 200 XP"></div>
-                    <span>Nhiều</span>
-                `;
+                            <span>Ít</span>
+                            <div style="width: 14px; height: 14px; border-radius: 4px; background: ${emptyColor};"></div>
+                            <div style="width: 14px; height: 14px; border-radius: 4px; background: #d3f9d8;" title="Dưới 20 XP"></div>
+                            <div style="width: 14px; height: 14px; border-radius: 4px; background: #9be9a8;" title="20 - 50 XP"></div>
+                            <div style="width: 14px; height: 14px; border-radius: 4px; background: #40c463;" title="50 - 100 XP"></div>
+                            <div style="width: 14px; height: 14px; border-radius: 4px; background: #30a14e;" title="100 - 200 XP"></div>
+                            <div style="width: 14px; height: 14px; border-radius: 4px; background: #216e39;" title="Trên 200 XP"></div>
+                            <span>Nhiều</span>
+                        `;
                 heatmapContainer.appendChild(legend);
             }
 
             /* =========================================
-               PHẦN 3: TỪ CẦN CẢI THIỆN (WEAK WORDS)
-               - Hiển thị TẤT CẢ từ đang học (Stability > 0)
-               - Sắp xếp từ yếu nhất lên đầu
-               - Bỏ phần Huy hiệu (Badge)
-               ========================================= */
+                       PHẦN 3: TỪ CẦN CẢI THIỆN (WEAK WORDS)
+                       - Hiển thị TẤT CẢ từ đang học (Stability > 0)
+                       - Sắp xếp từ yếu nhất lên đầu
+                       - Bỏ phần Huy hiệu (Badge)
+                       ========================================= */
             const weakList = document.getElementById("weak-words-list");
             if (weakList) {
                 weakList.innerHTML = "";
@@ -5257,17 +5363,17 @@
                         item.className = "weak-item";
 
                         item.innerHTML = `
-                            <div style="display:flex; align-items:center; gap:12px; overflow:hidden;">
-                                <div style="width:6px; height:6px; background:${alertColor}; border-radius:50%; flex-shrink:0;"></div>
-                                <div style="overflow:hidden;">
-                                    <div style="font-weight:700; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${w.word}</div>
-                                    <div style="font-size:12px; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${w.meaning}</div>
-                                </div>
-                            </div>
-                            <div style="font-size:11px; font-weight:700; color:${alertColor}; background:${bgColor}; padding:4px 8px; border-radius:6px; margin-left:10px; flex-shrink:0;">
-                                ${timeStr}
-                            </div>
-                        `;
+                                    <div style="display:flex; align-items:center; gap:12px; overflow:hidden;">
+                                        <div style="width:6px; height:6px; background:${alertColor}; border-radius:50%; flex-shrink:0;"></div>
+                                        <div style="overflow:hidden;">
+                                            <div style="font-weight:700; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${w.word}</div>
+                                            <div style="font-size:12px; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${w.meaning}</div>
+                                        </div>
+                                    </div>
+                                    <div style="font-size:11px; font-weight:700; color:${alertColor}; background:${bgColor}; padding:4px 8px; border-radius:6px; margin-left:10px; flex-shrink:0;">
+                                        ${timeStr}
+                                    </div>
+                                `;
 
                         item.style.cursor = "pointer";
                         item.title = "Bấm để nghe phát âm";
@@ -5406,12 +5512,12 @@
             const allDiv = document.createElement("div");
             allDiv.className = "topic-option-card selected";
             allDiv.innerHTML = `
-        <div class="topic-info">
-            <div class="topic-icon-wrapper"><span class="topic-icon">🌟</span></div>
-            Tất cả chủ đề
-        </div>
-        <div class="topic-count">${totalCountLabel}</div>
-    `;
+                <div class="topic-info">
+                    <div class="topic-icon-wrapper"><span class="topic-icon">🌟</span></div>
+                    Tất cả chủ đề
+                </div>
+                <div class="topic-count">${totalCountLabel}</div>
+            `;
             allDiv.onclick = () => selectTopic(allDiv, "");
             container.appendChild(allDiv);
             document.getElementById("selected-topic-val").value = "";
@@ -5448,12 +5554,12 @@
                     const div = document.createElement("div");
                     div.className = "topic-option-card";
                     div.innerHTML = `
-                <div class="topic-info">
-                    <div class="topic-icon-wrapper"><span class="topic-icon">${getTopicIcon(topic)}</span></div>
-                    ${topic}
-                </div>
-                <div class="topic-count">${countLabel}</div>
-            `;
+                        <div class="topic-info">
+                            <div class="topic-icon-wrapper"><span class="topic-icon">${getTopicIcon(topic)}</span></div>
+                            ${topic}
+                        </div>
+                        <div class="topic-count">${countLabel}</div>
+                    `;
                     div.onclick = () => selectTopic(div, topic);
                     container.appendChild(div);
                 }
@@ -5613,18 +5719,18 @@
                     item.title = `Chủ đề: ${reading.topic} | ${reading.title}`;
 
                     item.innerHTML = `
-                <div style="display:flex; align-items:center; gap:10px; flex:1; overflow:hidden;">
-                    <div style="width:6px; height:6px; background:var(--primary); border-radius:50%; flex-shrink:0;"></div>
+                        <div style="display:flex; align-items:center; gap:10px; flex:1; overflow:hidden;">
+                            <div style="width:6px; height:6px; background:var(--primary); border-radius:50%; flex-shrink:0;"></div>
 
-                    <div style="font-size:13px; font-weight:600; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-                        ${reading.title}
-                    </div>
-                </div>
+                            <div style="font-size:13px; font-weight:600; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                                ${reading.title}
+                            </div>
+                        </div>
 
-                <div style="font-size:10px; font-weight:700; color:var(--text-muted); background:var(--bg-body); border:1px solid var(--border-color); padding:2px 6px; border-radius:4px; margin-left:8px; flex-shrink:0;">
-                    GĐ ${reading.stage}
-                </div>
-            `;
+                        <div style="font-size:10px; font-weight:700; color:var(--text-muted); background:var(--bg-body); border:1px solid var(--border-color); padding:2px 6px; border-radius:4px; margin-left:8px; flex-shrink:0;">
+                            GĐ ${reading.stage}
+                        </div>
+                    `;
 
                     item.onclick = () => {
                         closeModal("reading-select-modal");
@@ -5731,11 +5837,11 @@
                 processedContent = processedContent.replace(regex, (match) => {
                     const key = `___PH_${placeholderCount}___`;
                     placeholders[key] = `<span class="highlight-word"
-                                               data-meaning="${card.meaning}"
-                                               onclick="speakWord(this.innerText); event.stopPropagation();"
-                                               title="Bấm để nghe: ${match}">
-                                               ${match}
-                                         </span>`;
+                                                       data-meaning="${card.meaning}"
+                                                       onclick="speakWord(this.innerText); event.stopPropagation();"
+                                                       title="Bấm để nghe: ${match}">
+                                                       ${match}
+                                                 </span>`;
                     placeholderCount++;
                     return key;
                 });
@@ -5799,16 +5905,16 @@
             changeBtn.innerHTML =
                 '<i class="ph-bold ph-list"></i> <span style="font-size:13px">Chọn bài</span>';
             changeBtn.style.cssText = `
-                background: var(--surface);
-                color: var(--text-muted);
-                border: 1px solid var(--border-color);
-                padding: 6px 12px;
-                border-radius: 12px;
-                font-weight: 600;
-                cursor: pointer;
-                display: flex; align-items: center; gap: 6px;
-                transition: all 0.2s;
-            `;
+                        background: var(--surface);
+                        color: var(--text-muted);
+                        border: 1px solid var(--border-color);
+                        padding: 6px 12px;
+                        border-radius: 12px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        display: flex; align-items: center; gap: 6px;
+                        transition: all 0.2s;
+                    `;
             changeBtn.onclick = () => {
                 window.speechSynthesis.cancel(); // Tắt tiếng khi chuyển
                 openTopicModal("reading");
@@ -5827,17 +5933,17 @@
             playBtn.innerHTML =
                 '<i class="ph-fill ph-play"></i> <span style="font-size:13px">Nghe bài</span>';
             playBtn.style.cssText = `
-                background: var(--primary);
-                color: white;
-                border: none;
-                padding: 6px 16px;
-                border-radius: 12px;
-                font-weight: 600;
-                cursor: pointer;
-                display: flex; align-items: center; gap: 6px;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-                transition: all 0.2s;
-            `;
+                        background: var(--primary);
+                        color: white;
+                        border: none;
+                        padding: 6px 16px;
+                        border-radius: 12px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        display: flex; align-items: center; gap: 6px;
+                        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                        transition: all 0.2s;
+                    `;
 
             // Logic Đọc (Chỉ 1 nút)
             let isSpeaking = false;
@@ -6332,30 +6438,30 @@
                     }
 
                     return `
-    <tr>
-        <td>${displayIndex}</td>
-        <td><input type="checkbox" class="card-checkbox" value="${card.id}"></td>
-        <td style="font-weight:700; color:var(--text-main)">
-            ${wordDisplay}
-            <br> <span style="font-weight:400; color:var(--text-muted); font-size:12px">${
-                card.ipa || ""
-            }</span>
-        </td>
-        <td>${imageHtml}</td>
-        <td><span class="topic-tag">${card.topic}</span></td>
-        <td><span style="font-weight:700">${card.stage}</span></td>
-        <td>${card.meaning}</td>
-        <td style="text-align:right">
-            <button class="action-btn" style="background:#f1f5f9; color:var(--text-main)" onclick="speakWord('${safeWord}')"><i class="ph-bold ph-speaker-high"></i></button>
-            <button class="action-btn" style="background:var(--primary-light); color:var(--primary)" onclick="openEditModal(${
-                card.id
-            })"><i class="ph-bold ph-pencil-simple"></i></button>
-            <button class="action-btn" style="background:#fee2e2; color:#ef4444" onclick="deleteCard(${
-                card.id
-            })"><i class="ph-bold ph-trash"></i></button>
-        </td>
-    </tr>
-`;
+            <tr>
+                <td>${displayIndex}</td>
+                <td><input type="checkbox" class="card-checkbox" value="${card.id}"></td>
+                <td style="font-weight:700; color:var(--text-main)">
+                    ${wordDisplay}
+                    <br> <span style="font-weight:400; color:var(--text-muted); font-size:12px">${
+                        card.ipa || ""
+                    }</span>
+                </td>
+                <td>${imageHtml}</td>
+                <td><span class="topic-tag">${card.topic}</span></td>
+                <td><span style="font-weight:700">${card.stage}</span></td>
+                <td>${card.meaning}</td>
+                <td style="text-align:right">
+                    <button class="action-btn" style="background:#f1f5f9; color:var(--text-main)" onclick="speakWord('${safeWord}')"><i class="ph-bold ph-speaker-high"></i></button>
+                    <button class="action-btn" style="background:var(--primary-light); color:var(--primary)" onclick="openEditModal(${
+                        card.id
+                    })"><i class="ph-bold ph-pencil-simple"></i></button>
+                    <button class="action-btn" style="background:#fee2e2; color:#ef4444" onclick="deleteCard(${
+                        card.id
+                    })"><i class="ph-bold ph-trash"></i></button>
+                </td>
+            </tr>
+        `;
                 })
                 .join("");
 
@@ -6392,33 +6498,33 @@
 
             // HTML cho thanh điều hướng
             paginationDiv.innerHTML = `
-        <div style="font-size: 13px; color: var(--text-muted);">
-            Tổng: <b>${totalItems}</b> từ
-        </div>
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <button onclick="changeAdminPage(-1)" 
-                style="padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--surface); cursor: pointer; display: flex; align-items: center; gap: 5px; ${
-                    adminCurrentPage === 1
-                        ? "opacity: 0.5; pointer-events: none;"
-                        : ""
-                }">
-                <i class="ph-bold ph-caret-left"></i> Trước
-            </button>
-            
-            <span style="font-size: 13px; font-weight: 700; color: var(--text-main); min-width: 80px; text-align: center;">
-                Trang ${adminCurrentPage} / ${totalPages}
-            </span>
-            
-            <button onclick="changeAdminPage(1)" 
-                style="padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--surface); cursor: pointer; display: flex; align-items: center; gap: 5px; ${
-                    adminCurrentPage === totalPages
-                        ? "opacity: 0.5; pointer-events: none;"
-                        : ""
-                }">
-                Sau <i class="ph-bold ph-caret-right"></i>
-            </button>
-        </div>
-    `;
+                <div style="font-size: 13px; color: var(--text-muted);">
+                    Tổng: <b>${totalItems}</b> từ
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <button onclick="changeAdminPage(-1)"
+                        style="padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--surface); cursor: pointer; display: flex; align-items: center; gap: 5px; ${
+                            adminCurrentPage === 1
+                                ? "opacity: 0.5; pointer-events: none;"
+                                : ""
+                        }">
+                        <i class="ph-bold ph-caret-left"></i> Trước
+                    </button>
+
+                    <span style="font-size: 13px; font-weight: 700; color: var(--text-main); min-width: 80px; text-align: center;">
+                        Trang ${adminCurrentPage} / ${totalPages}
+                    </span>
+
+                    <button onclick="changeAdminPage(1)"
+                        style="padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--surface); cursor: pointer; display: flex; align-items: center; gap: 5px; ${
+                            adminCurrentPage === totalPages
+                                ? "opacity: 0.5; pointer-events: none;"
+                                : ""
+                        }">
+                        Sau <i class="ph-bold ph-caret-right"></i>
+                    </button>
+                </div>
+            `;
         }
 
         // --- THÊM MỚI: HÀM XỬ LÝ CHUYỂN TRANG ---
@@ -6746,6 +6852,8 @@
             // 3. LƯU DỮ LIỆU
             saveData();
 
+            handleQuestProgress();
+
             // 4. CHUYỂN SANG MÀN HÌNH VIẾT
             switchToWritingPhase();
 
@@ -6905,23 +7013,23 @@
                         : "—";
 
                     return `
-            <tr>
-                <td>${displayIndex}</td>
-                <td style="font-weight:700">${card.word}</td>
-                <td>${statusHtml}</td>
-                <td>${card.difficulty.toFixed(2)}</td>
-                <td>${card.stability.toFixed(2)} days</td>
-                <td>${dueDateStr}</td>
-                <td>${lastReviewStr}</td>
-                <td>
-                    <button class="action-btn" onclick="openSRSEdit(${
-                        card.id
-                    })" title="Chỉnh sửa SRS">
-                        <i class="ph-bold ph-faders"></i>
-                    </button>
-                </td>
-            </tr>
-        `;
+                    <tr>
+                        <td>${displayIndex}</td>
+                        <td style="font-weight:700">${card.word}</td>
+                        <td>${statusHtml}</td>
+                        <td>${card.difficulty.toFixed(2)}</td>
+                        <td>${card.stability.toFixed(2)} days</td>
+                        <td>${dueDateStr}</td>
+                        <td>${lastReviewStr}</td>
+                        <td>
+                            <button class="action-btn" onclick="openSRSEdit(${
+                                card.id
+                            })" title="Chỉnh sửa SRS">
+                                <i class="ph-bold ph-faders"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
                 })
                 .join("");
 
@@ -6961,33 +7069,33 @@
             paginationDiv.style.display = "flex";
 
             paginationDiv.innerHTML = `
-        <div style="font-size: 13px; color: var(--text-muted);">
-            Tổng: <b>${totalItems}</b> từ
-        </div>
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <button onclick="changeSRSPage(-1)" 
-                style="padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--surface); cursor: pointer; display: flex; align-items: center; gap: 5px; ${
-                    srsCurrentPage === 1
-                        ? "opacity: 0.5; pointer-events: none;"
-                        : ""
-                }">
-                <i class="ph-bold ph-caret-left"></i> Trước
-            </button>
-            
-            <span style="font-size: 13px; font-weight: 700; color: var(--text-main); min-width: 80px; text-align: center;">
-                Trang ${srsCurrentPage} / ${totalPages}
-            </span>
-            
-            <button onclick="changeSRSPage(1)" 
-                style="padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--surface); cursor: pointer; display: flex; align-items: center; gap: 5px; ${
-                    srsCurrentPage === totalPages
-                        ? "opacity: 0.5; pointer-events: none;"
-                        : ""
-                }">
-                Sau <i class="ph-bold ph-caret-right"></i>
-            </button>
-        </div>
-    `;
+                <div style="font-size: 13px; color: var(--text-muted);">
+                    Tổng: <b>${totalItems}</b> từ
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <button onclick="changeSRSPage(-1)"
+                        style="padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--surface); cursor: pointer; display: flex; align-items: center; gap: 5px; ${
+                            srsCurrentPage === 1
+                                ? "opacity: 0.5; pointer-events: none;"
+                                : ""
+                        }">
+                        <i class="ph-bold ph-caret-left"></i> Trước
+                    </button>
+
+                    <span style="font-size: 13px; font-weight: 700; color: var(--text-main); min-width: 80px; text-align: center;">
+                        Trang ${srsCurrentPage} / ${totalPages}
+                    </span>
+
+                    <button onclick="changeSRSPage(1)"
+                        style="padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--surface); cursor: pointer; display: flex; align-items: center; gap: 5px; ${
+                            srsCurrentPage === totalPages
+                                ? "opacity: 0.5; pointer-events: none;"
+                                : ""
+                        }">
+                        Sau <i class="ph-bold ph-caret-right"></i>
+                    </button>
+                </div>
+            `;
         }
 
         // --- HÀM CHUYỂN TRANG SRS ---
@@ -7553,11 +7661,11 @@
             // Kiểm tra nếu chưa có dữ liệu
             if (!appState.readings || appState.readings.length === 0) {
                 tbody.innerHTML = `
-                    <tr>
-                        <td colspan="6" style="text-align:center; padding:30px; color:var(--text-muted);">
-                            Chưa có bài đọc nào. Hãy bấm "Thêm bài đọc" để tạo mới!
-                        </td>
-                    </tr>`;
+                            <tr>
+                                <td colspan="6" style="text-align:center; padding:30px; color:var(--text-muted);">
+                                    Chưa có bài đọc nào. Hãy bấm "Thêm bài đọc" để tạo mới!
+                                </td>
+                            </tr>`;
                 return;
             }
 
@@ -7572,34 +7680,34 @@
                 }
 
                 tr.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td style="font-weight:700; color:var(--primary)">${
-                        reading.title
-                    }</td>
-                    <td>
-                      <span class="topic-tag">
-            ${reading.topic}
-        </span>
-                    </td>
-                    <td><span style="font-weight:700">GĐ ${
-                        reading.stage
-                    }</span></td>
-                    <td style="color:var(--text-muted); font-size:13px; font-style:italic;">${previewContent}</td>
-                    <td style="text-align:right">
-                        <button class="action-btn" style="background:var(--primary-light); color:var(--primary)"
-                                onclick="openReadingEditor(${
-                                    reading.id
-                                })" title="Sửa">
-                            <i class="ph-bold ph-pencil-simple"></i>
-                        </button>
-                        <button class="action-btn" style="background:#fee2e2; color:#ef4444"
-                                onclick="deleteReading(${
-                                    reading.id
-                                })" title="Xóa">
-                            <i class="ph-bold ph-trash"></i>
-                        </button>
-                    </td>
-                `;
+                            <td>${index + 1}</td>
+                            <td style="font-weight:700; color:var(--primary)">${
+                                reading.title
+                            }</td>
+                            <td>
+                              <span class="topic-tag">
+                    ${reading.topic}
+                </span>
+                            </td>
+                            <td><span style="font-weight:700">GĐ ${
+                                reading.stage
+                            }</span></td>
+                            <td style="color:var(--text-muted); font-size:13px; font-style:italic;">${previewContent}</td>
+                            <td style="text-align:right">
+                                <button class="action-btn" style="background:var(--primary-light); color:var(--primary)"
+                                        onclick="openReadingEditor(${
+                                            reading.id
+                                        })" title="Sửa">
+                                    <i class="ph-bold ph-pencil-simple"></i>
+                                </button>
+                                <button class="action-btn" style="background:#fee2e2; color:#ef4444"
+                                        onclick="deleteReading(${
+                                            reading.id
+                                        })" title="Xóa">
+                                    <i class="ph-bold ph-trash"></i>
+                                </button>
+                            </td>
+                        `;
                 tbody.appendChild(tr);
             });
         }
@@ -7619,10 +7727,10 @@
                 }
 
                 div.innerHTML = `
-                    <div class="ipa-symbol">${item.symbol}</div>
-                    <div class="ipa-word">${item.word}</div>
-                    <i class="ph-fill ph-speaker-high ipa-play-icon"></i>
-                `;
+                            <div class="ipa-symbol">${item.symbol}</div>
+                            <div class="ipa-word">${item.word}</div>
+                            <i class="ph-fill ph-speaker-high ipa-play-icon"></i>
+                        `;
 
                 // Khi click thì đọc từ ví dụ
                 div.onclick = () => {
@@ -8093,9 +8201,9 @@
                 reviewedToday.forEach((c) => {
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
-                <td style="padding: 8px 4px; font-weight: 700; color: var(--primary); border-bottom: 1px solid var(--border-color);">${c.word}</td>
-                <td style="padding: 8px 4px; font-size: 13px; color: var(--text-main); border-bottom: 1px solid var(--border-color);">${c.meaning}</td>
-            `;
+                        <td style="padding: 8px 4px; font-weight: 700; color: var(--primary); border-bottom: 1px solid var(--border-color);">${c.word}</td>
+                        <td style="padding: 8px 4px; font-size: 13px; color: var(--text-main); border-bottom: 1px solid var(--border-color);">${c.meaning}</td>
+                    `;
                     tbody.appendChild(tr);
                 });
             }
@@ -8330,17 +8438,17 @@
             overlay.id = "note-expand-overlay";
 
             overlay.innerHTML = `
-        <div class="expanded-note-box">
-            <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-                <h3 style="color:var(--primary)">Ghi chú chi tiết</h3>
-                <button onclick="closeExpandNote()" style="background:none; border:none; font-size:24px; cursor:pointer; color:var(--text-muted)">&times;</button>
-            </div>
-            <textarea id="big-note-input" spellcheck="false" class="expanded-textarea" placeholder="Viết ghi chú thoải mái tại đây...">${tempNoteContent}</textarea>
-            <div style="margin-top:15px; text-align:right;">
-                <button onclick="closeExpandNote()" class="start-btn" style="padding:10px 24px;">Lưu & Đóng</button>
-            </div>
-        </div>
-    `;
+                <div class="expanded-note-box">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+                        <h3 style="color:var(--primary)">Ghi chú chi tiết</h3>
+                        <button onclick="closeExpandNote()" style="background:none; border:none; font-size:24px; cursor:pointer; color:var(--text-muted)">&times;</button>
+                    </div>
+                    <textarea id="big-note-input" spellcheck="false" class="expanded-textarea" placeholder="Viết ghi chú thoải mái tại đây...">${tempNoteContent}</textarea>
+                    <div style="margin-top:15px; text-align:right;">
+                        <button onclick="closeExpandNote()" class="start-btn" style="padding:10px 24px;">Lưu & Đóng</button>
+                    </div>
+                </div>
+            `;
 
             document.body.appendChild(overlay);
 
@@ -8712,6 +8820,431 @@
             if (panel) panel.classList.remove("active");
             if (overlay) overlay.classList.remove("show");
         };
+
+        /* --- LOGIC DAILY CHALLENGE (MỚI) --- */
+
+        // 1. Hàm khởi chạy (Gọi trong init)
+        window.initDailyChallenge = function () {
+            const today = new Date().toDateString();
+
+            // Kiểm tra dữ liệu cũ
+            if (!appState.challenge) {
+                appState.challenge = {
+                    date: today,
+                    type: "words",
+                    target: 20,
+                    current: 0,
+                    timeSpent: 0,
+                    completed: false,
+                    penalty: false,
+                };
+            }
+
+            // Nếu sang ngày mới
+            if (appState.challenge.date !== today) {
+                // Kiểm tra ngày hôm qua có hoàn thành không?
+                const yesterdayCompleted = appState.challenge.completed;
+
+                // Reset cho ngày mới
+                appState.challenge = {
+                    date: today,
+                    type: appState.challenge.type, // Giữ lại cài đặt cũ
+                    target: appState.challenge.target,
+                    current: 0,
+                    timeSpent: 0,
+                    completed: false,
+                    penalty: !yesterdayCompleted, // Nếu hôm qua chưa xong -> Bị phạt
+                };
+                saveData();
+            }
+
+            // Cập nhật UI lần đầu
+            document.getElementById("target-type").value =
+                appState.challenge.type;
+            document.getElementById("target-value").value =
+                appState.challenge.target;
+            renderChallengeUI();
+
+            // Bắt đầu đếm giờ (Nếu chọn chế độ Time)
+            setInterval(() => {
+                if (!document.hidden && !appState.challenge.completed) {
+                    appState.challenge.timeSpent++; // Cộng 1 giây
+                    if (appState.challenge.type === "time") {
+                        renderChallengeUI(); // Cập nhật thanh tiến độ
+                        if (appState.challenge.timeSpent % 60 === 0) saveData(); // Lưu mỗi phút
+                    }
+                }
+            }, 1000);
+        };
+
+        // 2. Hàm vẽ lại giao diện Challenge
+        window.renderChallengeUI = function () {
+            const ch = appState.challenge;
+            const isTime = ch.type === "time";
+
+            // Tính toán
+            let currentVal = isTime
+                ? Math.floor(ch.timeSpent / 60)
+                : ch.current;
+            let targetVal = parseInt(ch.target);
+            let percent = (currentVal / targetVal) * 100;
+            if (percent > 100) percent = 100;
+
+            // DOM Elements
+            const bar = document.getElementById("challenge-bar");
+            const badge = document.getElementById("challenge-badge");
+            const statusText = document.getElementById("challenge-status-text");
+            const penaltyAlert = document.getElementById("penalty-alert");
+
+            // Update Text
+            document.getElementById("progress-text").innerText =
+                `${currentVal} / ${targetVal} ${isTime ? "phút" : "từ"}`;
+            document.getElementById("progress-percent").innerText =
+                `${Math.round(percent)}%`;
+            bar.style.width = `${percent}%`;
+
+            // Update Trạng thái
+            if (currentVal >= targetVal) {
+                ch.completed = true;
+                badge.innerText = "Hoàn thành";
+                badge.style.background = "var(--success-color, #10b981)";
+                badge.style.color = "#fff";
+                bar.style.background = "var(--success-color, #10b981)";
+                statusText.innerText =
+                    "Tuyệt vời! Bạn đã xong mục tiêu hôm nay.";
+                penaltyAlert.style.display = "none";
+            } else {
+                ch.completed = false;
+                badge.innerText = "Đang chạy";
+                badge.style.background = "var(--surface-2)";
+                badge.style.color = "var(--text-main)";
+                bar.style.background = "var(--primary-color)";
+                statusText.innerText = ch.penalty
+                    ? "⚠️ BẠN ĐANG BỊ PHẠT! Hãy cố gắng hoàn thành gấp đôi."
+                    : "Cố lên! Đừng để bị phạt vào ngày mai.";
+
+                // Hiện cảnh báo phạt nếu đang bị phạt
+                penaltyAlert.style.display = ch.penalty ? "flex" : "none";
+                if (ch.penalty)
+                    penaltyAlert.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> <span><b>BỊ PHẠT:</b> Hôm qua bạn lười học!</span>`;
+            }
+        };
+
+        // 3. Hàm xử lý khi người dùng chỉnh setting
+        window.updateChallengeSettings = function () {
+            appState.challenge.type =
+                document.getElementById("target-type").value;
+            appState.challenge.target = parseInt(
+                document.getElementById("target-value").value,
+            );
+            renderChallengeUI();
+            saveData();
+        };
+
+        /* --- LOGIC DAILY QUEST (AUTO TRACKING) --- */
+
+        // 1. Hàm khởi tạo (Chạy 1 lần khi load web)
+        /* --- LOGIC DAILY QUEST (FINAL VERSION) --- */
+
+        // 1. Khởi tạo
+        function initDailyQuest() {
+            const today = new Date().toDateString();
+
+            // Tạo cấu trúc dữ liệu nếu chưa có
+            if (!appState.challenge || appState.challenge.date !== today) {
+                appState.challenge = {
+                    date: today,
+                    isRunning: false, // Trạng thái đang chạy
+                    isFinished: false, // Trạng thái đã xong
+                    type: "words",
+                    target: 20,
+                    current: 0,
+                    timeSpent: 0,
+                };
+                saveData();
+            }
+
+            // Vẽ lại giao diện đúng trạng thái
+            renderQuestUI();
+
+            // Loop đếm giờ (Chạy ngầm)
+            setInterval(() => {
+                // Chỉ đếm khi ĐANG CHẠY (isRunning = true) và chưa xong
+                if (
+                    !document.hidden &&
+                    appState.challenge.isRunning &&
+                    !appState.challenge.isFinished
+                ) {
+                    appState.challenge.timeSpent++;
+
+                    // Nếu là chế độ Time -> Cập nhật UI
+                    if (appState.challenge.type === "time") {
+                        renderQuestUI();
+                        // Check hoàn thành
+                        if (
+                            Math.floor(appState.challenge.timeSpent / 60) >=
+                            appState.challenge.target
+                        ) {
+                            finishChallenge();
+                        }
+                        if (appState.challenge.timeSpent % 60 === 0) saveData();
+                    }
+                }
+            }, 1000);
+        }
+
+        // --- HÀM XỬ LÝ TIẾN ĐỘ QUEST (Dùng chung cho cả Chuột & Phím) ---
+        function handleQuestProgress() {
+            // Chỉ xử lý nếu Quest đang chạy, chưa xong và là loại "Số từ"
+            if (
+                appState.challenge.isRunning &&
+                !appState.challenge.isFinished &&
+                appState.challenge.type === "words"
+            ) {
+                // 1. Lưu vào biểu đồ cột
+                saveQuestProgress("words", 1);
+
+                // 2. Tăng số đếm
+                appState.challenge.current++;
+
+                // 3. Kiểm tra về đích
+                if (appState.challenge.current >= appState.challenge.target) {
+                    finishChallenge();
+                } else {
+                    renderQuestUI();
+                    saveData();
+                }
+            }
+        }
+
+        // 2. Bắt đầu thử thách (Gắn vào nút Bắt đầu)
+        window.startChallenge = function () {
+            const type = document.getElementById("target-type").value;
+            const val = parseInt(document.getElementById("target-val").value);
+
+            if (val <= 0) return alert("Mục tiêu phải lớn hơn 0!");
+
+            // Set trạng thái
+            appState.challenge.type = type;
+            appState.challenge.target = val;
+            appState.challenge.isRunning = true;
+            appState.challenge.isFinished = false;
+            appState.challenge.current = 0;
+            appState.challenge.timeSpent = 0;
+
+            saveData();
+            renderQuestUI();
+        };
+
+        // 3. Reset thử thách (Gắn vào nút Làm mới)
+        window.resetChallenge = function () {
+            if (confirm("Bạn muốn tạo thử thách mới?")) {
+                appState.challenge.isRunning = false;
+                appState.challenge.isFinished = false;
+                appState.challenge.current = 0;
+                appState.challenge.timeSpent = 0;
+                saveData();
+                renderQuestUI();
+            }
+        };
+
+        // 4. Hoàn thành thử thách
+        function finishChallenge() {
+            appState.challenge.isFinished = true;
+            // appState.challenge.isRunning = false; // Giữ true để hiển thị trạng thái đã xong
+            saveData();
+            renderQuestUI();
+
+            // Hiệu ứng pháo hoa hoặc thông báo
+            alert("🎉 CHÚC MỪNG! Bạn đã hoàn thành thử thách hôm nay!");
+        }
+
+        // 5. Render Giao diện (Xử lý Khóa/Mở)
+        function renderQuestUI() {
+            const ch = appState.challenge;
+            const isTime = ch.type === "time";
+
+            // Lấy DOM
+            const inputType = document.getElementById("target-type");
+            const inputVal = document.getElementById("target-val");
+            const btnStart = document.getElementById("btn-start-quest");
+            const btnReset = document.getElementById("btn-reset-quest");
+            const progressArea = document.getElementById("quest-progress-area");
+            const badge = document.getElementById("quest-badge");
+
+            // --- XỬ LÝ TRẠNG THÁI KHÓA/MỞ ---
+            if (ch.isRunning) {
+                // Đang chạy hoặc đã xong -> KHÓA Input
+                inputType.disabled = true;
+                inputVal.disabled = true;
+                btnStart.style.display = "none"; // Ẩn nút bắt đầu
+                progressArea.style.opacity = "1"; // Hiện rõ thanh tiến độ
+
+                if (ch.isFinished) {
+                    btnReset.style.display = "block"; // Hiện nút làm mới
+                    badge.innerText = "Đã hoàn thành";
+                    badge.style.background = "#dcfce7";
+                    badge.style.color = "#166534";
+                } else {
+                    btnReset.style.display = "none";
+                    badge.innerText = "Đang thực hiện...";
+                    badge.style.background = "#fee2e2";
+                    badge.style.color = "#ef4444";
+                }
+            } else {
+                // Chưa chạy -> MỞ Input
+                inputType.disabled = false;
+                inputVal.disabled = false;
+                btnStart.style.display = "block";
+                btnReset.style.display = "none";
+                progressArea.style.opacity = "0.5"; // Mờ thanh tiến độ đi
+                badge.innerText = "Chưa bắt đầu";
+                badge.style.background = "#f3f4f6";
+                badge.style.color = "#6b7280";
+            }
+
+            // --- TÍNH TOÁN THANH TIẾN ĐỘ ---
+            let current = isTime ? Math.floor(ch.timeSpent / 60) : ch.current;
+            let target = parseInt(ch.target);
+            let percent = Math.min((current / target) * 100, 100);
+
+            document.getElementById("quest-count").innerText =
+                `${current} / ${target} ${isTime ? "phút" : "từ"}`;
+            document.getElementById("quest-bar").style.width = percent + "%";
+            document.getElementById("quest-percent").innerText =
+                Math.round(percent) + "%";
+
+            if (percent >= 100)
+                document.getElementById("quest-bar").style.background =
+                    "#10b981";
+            else
+                document.getElementById("quest-bar").style.background =
+                    "#4f46e5";
+        }
+
+        // 6. 🔥 FIX LỖI SỐ KHÔNG NHẢY (Quan trọng nhất) 🔥
+
+        document.addEventListener("click", function (e) {});
+
+        // Gọi hàm khởi tạo
+        // (Đảm bảo dòng này được gọi sau khi init() xong hoặc để cuối file)
+        setTimeout(initDailyQuest, 1000);
+
+        // 3. Xử lý khi chỉnh sửa cài đặt
+        window.updateQuestConfig = function () {
+            appState.challenge.type =
+                document.getElementById("target-type").value;
+            appState.challenge.target =
+                document.getElementById("target-val").value;
+            renderQuestUI();
+            saveData();
+        };
+
+        // 4. 🔥 QUAN TRỌNG: Tự động bắt sự kiện bấm nút 🔥
+        document.addEventListener("click", function (e) {});
+
+        /* =========================================
+           LOGIC BIỂU ĐỒ QUEST (STYLE GIỐNG TIME CHART)
+           ========================================= */
+
+        // 1. Hàm lưu lịch sử (Gọi hàm này khi hoàn thành 1 thẻ hoặc hết giờ)
+        function saveQuestProgress(type, amount) {
+            // Lấy ngày hiện tại (YYYY-MM-DD)
+            const today = new Date().toLocaleDateString("en-CA");
+
+            let history =
+                JSON.parse(localStorage.getItem("engMist_QuestHistory")) || {};
+            if (!history[today]) {
+                history[today] = { words: 0, time: 0 };
+            }
+
+            // Cộng dồn
+            if (type === "words") history[today].words += amount;
+            if (type === "time") history[today].time += amount;
+
+            localStorage.setItem(
+                "engMist_QuestHistory",
+                JSON.stringify(history),
+            );
+
+            // Vẽ lại biểu đồ ngay
+            renderQuestChart();
+        }
+
+        // 2. Hàm vẽ biểu đồ (Copy style từ renderDailyTimeChart)
+        // Hàm vẽ biểu đồ (Đã chỉnh cột TO HƠN)
+        function renderQuestChart() {
+            const chartContainer = document.getElementById("quest-chart-area");
+            if (!chartContainer) return;
+
+            const history =
+                JSON.parse(localStorage.getItem("engMist_QuestHistory")) || {};
+
+            // Tạo 7 ngày gần nhất
+            const days = [];
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date();
+                d.setDate(d.getDate() - i);
+                days.push(d);
+            }
+
+            // Tìm max để tính %
+            let maxVal = 10;
+            Object.values(history).forEach((d) => {
+                if (d.words > maxVal) maxVal = d.words;
+                if (d.time > maxVal) maxVal = d.time;
+            });
+
+            let html = "";
+            days.forEach((date) => {
+                const key = date.toLocaleDateString("en-CA");
+                const data = history[key] || { words: 0, time: 0 };
+                const dayName = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"][
+                    date.getDay()
+                ];
+                // Thêm ngày nhỏ bên dưới (VD: 05/03)
+                const dateSub = `${date.getDate()}/${date.getMonth() + 1}`;
+
+                // Tính % chiều cao (Tối thiểu 8% để cột không bị mất hút nếu số liệu nhỏ)
+                const hWords =
+                    data.words > 0
+                        ? Math.max((data.words / maxVal) * 100, 8)
+                        : 0;
+                const hTime =
+                    data.time > 0 ? Math.max((data.time / maxVal) * 100, 8) : 0;
+
+                // Tooltip hiển thị số liệu khi di chuột vào
+                const title = `Ngày ${dateSub}\n• Từ vựng: ${data.words}\n• Thời gian: ${data.time}p`;
+
+                html += `
+            <div style="display:flex; flex-direction:column; align-items:center; flex:1; height:100%;" title="${title}">
+                
+                <div style="display:flex; align-items:flex-end; justify-content:center; gap:6px; height:120px; width:100%;">
+                    
+                    <div style="width:25px; height:100%; background:var(--border-color); border-radius:6px; position:relative; overflow:hidden;">
+                        <div style="position:absolute; bottom:0; left:0; width:100%; height:${hWords}%; background:var(--primary); border-radius:6px; transition:height 0.5s;"></div>
+                    </div>
+                    
+                    <div style="width:25px; height:100%; background:var(--border-color); border-radius:6px; position:relative; overflow:hidden;">
+                        <div style="position:absolute; bottom:0; left:0; width:100%; height:${hTime}%; background:var(--accent-orange); border-radius:6px; transition:height 0.5s;"></div>
+                    </div>
+
+                </div>
+
+                <div style="font-size:11px; font-weight:700; color:#64748b; margin-top:8px; text-align:center; line-height:1.2;">
+                    ${dayName}<br>
+                    <span style="font-weight:500; font-size:9px; opacity:0.8">${dateSub}</span>
+                </div>
+            </div>
+        `;
+            });
+            chartContainer.innerHTML = html;
+        }
+
+        // Gọi hàm vẽ khi load trang
+        document.addEventListener("DOMContentLoaded", () => {
+            renderQuestChart();
+        });
     </script>
     <script src="./JS/Ai_chatbox.js"></script>
 </html>
