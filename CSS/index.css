@@ -4388,3 +4388,31 @@ body.tet-theme .firework-2 {
     transform: translateY(-1px);
     box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
 }
+
+/* Chỉnh lại màu icon trên thanh công cụ cho dễ nhìn */
+.ql-toolbar button {
+    color: var(--text-main) !important;
+}
+.ql-toolbar .ql-stroke {
+    stroke: var(--text-main) !important;
+}
+.ql-toolbar .ql-fill {
+    fill: var(--text-main) !important;
+}
+.ql-toolbar .ql-picker {
+    color: var(--text-main) !important;
+}
+
+/* Chỉnh viền và bo góc cho giống theme Apple UI của bạn */
+.ql-toolbar.ql-snow {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-color: var(--border-color) !important;
+    background-color: var(--bg-body);
+}
+.ql-container.ql-snow {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-color: var(--border-color) !important;
+    font-size: 16px; /* Chữ to rõ hơn */
+}
