@@ -1574,6 +1574,7 @@ select,
     background: var(--bg-body);
     border-radius: 4px;
     overflow: hidden;
+    margin-top: 15px;
 }
 .progress-fill {
     height: 100%;
@@ -4243,3 +4244,147 @@ body.tet-theme .firework-2 {
 }
 
 /* Lưu ý: Nếu có nút "Lưu" bên dưới textarea, nó sẽ bị đẩy xuống đáy */
+
+/* =========================================
+   DAILY QUEST CARD STYLES
+   ========================================= */
+
+/* 1. Khung Card chính */
+.daily-quest-card {
+    grid-column: span 2; /* Chiếm 2 ô */
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 24px; /* Bo góc to hơn cho hiện đại */
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 2. Header: Căn chỉnh 2 bên */
+.quest-header {
+    display: flex;
+    justify-content: space-between; /* Đẩy 2 phần ra xa nhau */
+    align-items: center;
+}
+
+.quest-info h2 {
+    font-size: 1.4rem;
+    margin: 0;
+    font-weight: 800;
+    background: linear-gradient(90deg, #6366f1, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* Chữ màu gradient */
+}
+
+.quest-info p {
+    margin: 4px 0 0 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Badge trạng thái (Viên thuốc) */
+.quest-badge {
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background: var(--bg-body);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    white-space: nowrap; /* Không xuống dòng */
+}
+
+/* 3. Khu vực Option (Input & Select) */
+.quest-options {
+    display: flex;
+    gap: 15px;
+}
+
+.input-group {
+    flex: 1; /* Chia đều 2 bên */
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-left: 4px;
+}
+
+.quest-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid transparent; /* Viền ẩn */
+    background: var(--bg-body);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.quest-input:focus {
+    outline: none;
+    background: var(--surface);
+    border-color: #6366f1; /* Focus hiện viền tím */
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* 4. BUTTON (Nút bấm xịn) */
+.quest-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Style riêng nút Bắt đầu */
+.start-btn {
+    background: linear-gradient(
+        135deg,
+        #6366f1 0%,
+        #8b5cf6 100%
+    ); /* Tím sang Indigo */
+    color: white;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); /* Bóng đổ tím */
+}
+
+/* Style riêng nút Reset */
+.reset-btn {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%); /* Xanh lá */
+    color: white;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* Hiệu ứng HOVER (Bay lên) */
+.quest-btn:hover {
+    transform: translateY(-4px); /* Bay lên 4px */
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5); /* Bóng đậm hơn */
+    filter: brightness(1.1);
+}
+
+/* Hiệu ứng ACTIVE (Ấn xuống) */
+.quest-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+}
