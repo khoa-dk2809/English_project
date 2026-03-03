@@ -19,6 +19,11 @@
         <link rel="stylesheet" href="./CSS/index.css" />
         <link rel="stylesheet" href="./Theme/Tet_theme.css" />
         <link rel="stylesheet" href="./CSS/Apple_UI.css" />
+        <link
+            href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     </head>
     <body>
         <div id="toast-container" class="toast-container"></div>
@@ -8427,46 +8432,124 @@
         }
 
         // Biến lưu trạng thái nội dung trước khi phóng to
-        let tempNoteContent = "";
+        // Biến toàn cục để lưu trữ nội dung HTML chuẩn (để không bị mất màu sắc khi đóng mở)
+        let fullNoteHTML = "";
 
         function expandNoteInput() {
-            const input = document.getElementById("personal-note-input");
-            tempNoteContent = input.value; // Lấy nội dung hiện tại
+            // 1. Kiểm tra thư viện Quill
+            if (typeof Quill === "undefined") {
+                alert(
+                    "Lỗi: Thư viện soạn thảo chưa tải được. Vui lòng kiểm tra kết nối mạng!",
+                );
+                return;
+            }
 
-            // Tạo Overlay
-            const overlay = document.createElement("div");
-            overlay.className = "expanded-note-overlay";
-            overlay.id = "note-expand-overlay";
+            // Lấy nội dung hiện tại từ ô input nhỏ (hoặc biến lưu trữ nếu có)
+            const smallInput = document.getElementById("personal-note-input");
 
+            // Nếu chưa có nội dung HTML lưu trữ thì lấy tạm text từ ô nhỏ
+            if (!fullNoteHTML && smallInput.value.trim() !== "") {
+                fullNoteHTML = smallInput.value;
+            }
+
+            // 2. Tạo Overlay (Nếu chưa có thì tạo mới, có rồi thì dùng lại)
+            let overlay = document.getElementById("note-expand-overlay");
+            if (!overlay) {
+                overlay = document.createElement("div");
+                overlay.className = "expanded-note-overlay";
+                overlay.id = "note-expand-overlay";
+                // CSS trực tiếp để đảm bảo nó hiện lên trên cùng
+                overlay.style.position = "fixed";
+                overlay.style.top = "0";
+                overlay.style.left = "0";
+                overlay.style.width = "100%";
+                overlay.style.height = "100%";
+                overlay.style.background = "rgba(0, 0, 0, 0.5)";
+                overlay.style.zIndex = "2147483647"; // Max z-index
+                overlay.style.display = "flex";
+                overlay.style.alignItems = "center";
+                overlay.style.justifyContent = "center";
+                document.body.appendChild(overlay);
+            } else {
+                overlay.style.display = "flex"; // Hiện lại nếu đã có
+            }
+
+            // 3. Vẽ giao diện (HTML)
             overlay.innerHTML = `
-                <div class="expanded-note-box">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-                        <h3 style="color:var(--primary)">Ghi chú chi tiết</h3>
-                        <button onclick="closeExpandNote()" style="background:none; border:none; font-size:24px; cursor:pointer; color:var(--text-muted)">&times;</button>
-                    </div>
-                    <textarea id="big-note-input" spellcheck="false" class="expanded-textarea" placeholder="Viết ghi chú thoải mái tại đây...">${tempNoteContent}</textarea>
-                    <div style="margin-top:15px; text-align:right;">
-                        <button onclick="closeExpandNote()" class="start-btn" style="padding:10px 24px;">Lưu & Đóng</button>
-                    </div>
-                </div>
-            `;
+        <div class="expanded-note-box" style="width: 1000px; max-width: 95%; background: var(--surface); padding: 20px; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); animation: slideUp 0.3s ease;">
+            
+            <div style="display:flex; justify-content:space-between; margin-bottom:15px; align-items:center; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+                <h3 style="color:var(--primary); margin:0; display:flex; align-items:center; gap:8px; font-size:18px;">
+                    <i class="ph-fill ph-notebook" style="font-size:24px;"></i> 
+                    Ghi chú chi tiết
+                </h3>
+                <button onclick="closeExpandNote()" style="background:var(--bg-body); border:none; width:32px; height:32px; border-radius:50%; cursor:pointer; color:var(--text-muted); display:flex; align-items:center; justify-content:center; transition:0.2s;">
+                    <i class="ph-bold ph-x" style="font-size:18px;"></i>
+                </button>
+            </div>
 
-            document.body.appendChild(overlay);
+            <div class="quill-wrapper" style="background: var(--surface); display:flex; flex-direction:column;">
+                <div id="quill-editor" style="height: 360px; font-family: var(--font-main); font-size: 16px; background: var(--bg-body);"></div>
+            </div>
 
-            // Tự động focus vào cuối đoạn văn bản
-            const bigInput = document.getElementById("big-note-input");
-            bigInput.focus();
-            bigInput.setSelectionRange(
-                bigInput.value.length,
-                bigInput.value.length,
-            );
+            <div style="margin-top:20px; text-align:right; display:flex; justify-content:flex-end; gap:10px;">
+                <button onclick="closeExpandNote()" style="padding:10px 20px; border-radius:10px; border:1px solid var(--border-color); background:transparent; font-weight:600; cursor:pointer;">
+                    Hủy
+                </button>
+                <button id="btn-save-quill" class="start-btn" style="padding:10px 24px; box-shadow:none; background: var(--primary); color: white; border: none; border-radius: 10px; cursor: pointer;">
+                    <i class="ph-bold ph-floppy-disk"></i> Lưu lại
+                </button>
+            </div>
+        </div>
+    `;
 
-            // Lắng nghe sự kiện gõ phím để lưu real-time (tuỳ chọn)
-            bigInput.oninput = function () {
-                savePersonalNote(this.value); // Lưu vào data
-                document.getElementById("personal-note-input").value =
-                    this.value; // Đồng bộ lại ô nhỏ
-            };
+            // 4. Khởi tạo Quill (Bọc trong try-catch để an toàn)
+            try {
+                var quill = new Quill("#quill-editor", {
+                    theme: "snow",
+                    placeholder: "Viết ghi chú, ngữ pháp, ví dụ tại đây...",
+                    modules: {
+                        toolbar: [
+                            [{ header: [1, 2, 3, false] }], // Tiêu đề
+                            ["bold", "italic", "underline", "strike"], // Định dạng
+                            [{ list: "ordered" }, { list: "bullet" }], // Danh sách
+                            [{ color: [] }, { background: [] }], // Màu sắc
+                            ["clean"], // Xóa định dạng
+                        ],
+                    },
+                });
+
+                // 5. Đổ dữ liệu cũ vào Editor
+                if (fullNoteHTML) {
+                    quill.root.innerHTML = fullNoteHTML;
+                }
+
+                // 6. Xử lý nút LƯU
+                document.getElementById("btn-save-quill").onclick =
+                    function () {
+                        // Lưu HTML đầy đủ vào biến toàn cục
+                        fullNoteHTML = quill.root.innerHTML;
+
+                        // Cập nhật text thường vào ô input nhỏ (để người dùng thấy có chữ)
+                        // Lấy text thuần túy để hiển thị ở ô nhỏ cho gọn
+                        smallInput.value = quill.getText().trim();
+
+                        // Gọi hàm lưu note vào data thẻ (nếu có hàm này)
+                        if (typeof savePersonalNote === "function") {
+                            savePersonalNote(fullNoteHTML); // Lưu cả HTML vào data
+                        }
+
+                        console.log("Đã lưu Note:", fullNoteHTML);
+
+                        // Đóng bảng
+                        closeExpandNote();
+                    };
+            } catch (err) {
+                console.error("Lỗi khởi tạo Quill:", err);
+                alert(
+                    "Có lỗi khi mở trình soạn thảo. Xem console để biết chi tiết.",
+                );
+            }
         }
 
         function closeExpandNote() {
